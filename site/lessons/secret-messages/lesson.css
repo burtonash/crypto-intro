@@ -1,0 +1,19 @@
+/* Secret messages: lesson-specific Stage layouts (shared kit is in assets/css/stage.css). */
+.stage-frame .sm-plain { font-size: calc(var(--stage-title) * .7); font-weight: 500; }
+.stage-frame .sm-coded { font-size: calc(var(--stage-title) * .55); font-weight: 500; background: var(--amber); color: var(--on-amber); padding: .2em .4em; border-radius: 6px;
+  animation: st-pop .5s 1s both; }
+.stage-frame[data-ratio="wide"] .sm-plain, .stage-frame[data-ratio="wide"] .sm-coded { font-size: calc(var(--stage-title) * .45); }
+.stage-frame .st-tries.cols-1 li { white-space: pre; }
+
+/* explore */
+.enc-table { width: 100%; border-collapse: collapse; }
+.enc-table th, .enc-table td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 0.5px solid var(--hairline); vertical-align: top; }
+.enc-table th { width: 7rem; }
+.enc-table code { font: 500 15px var(--mono); overflow-wrap: anywhere; display: block; }
+.enc-table tr.on code { background: var(--amber); color: var(--on-amber); padding: 2px 6px; border-radius: 3px; }
+.enc-blurb { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+.enc-pick { font: 500 13px var(--mono); background: transparent; border: 1px solid var(--ink); border-radius: 4px; padding: 3px 8px; cursor: pointer; color: var(--ink); }
+.enc-pick[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+#sm-intercept { width: 100%; font: 500 15px var(--mono); padding: 8px 10px; border: 1px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.tries-wide { grid-template-columns: 1fr; }
+.tries-wide li { white-space: pre-wrap; overflow-wrap: anywhere; }

@@ -4,6 +4,7 @@
 // the site. The browser only ever plays files: it never calls a speech API.
 //
 //   node tools/voiceover.mjs caesar script     write voice/script.md (lines to record)
+//   node tools/voiceover.mjs all script        …for every lesson
 //   node tools/voiceover.mjs caesar render     render with the ElevenLabs API
 //   node tools/voiceover.mjs caesar manifest   index MP3s you made elsewhere
 //
@@ -22,7 +23,21 @@ import path from 'node:path';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [slug, command = 'script'] = process.argv.slice(2);
-if (!slug) fail('usage: node tools/voiceover.mjs <lesson> [script|render|manifest]');
+if (!slug) fail('usage: node tools/voiceover.mjs <lesson|all> [script|render|manifest]');
+
+// `all` runs the command for every lesson folder, one process each.
+if (slug === 'all') {
+  const { readdir } = await import('node:fs/promises');
+  const { execFileSync } = await import('node:child_process');
+  const lessonsDir = path.join(ROOT, 'site', 'lessons');
+  for (const d of (await readdir(lessonsDir, { withFileTypes: true })).filter((d) => d.isDirectory())) {
+    if (!await exists(path.join(lessonsDir, d.name, 'lesson.js'))) continue;
+    console.log(`\n== ${d.name}`);
+    execFileSync(process.execPath, [fileURLToPath(import.meta.url), d.name, command], { stdio: ['ignore', command === 'script' ? 'ignore' : 'inherit', 'inherit'] });
+    if (command === 'script') console.log(`  wrote site/lessons/${d.name}/voice/script.md`);
+  }
+  process.exit(0);
+}
 
 const lessonDir = path.join(ROOT, 'site', 'lessons', slug);
 const voiceDir = path.join(lessonDir, 'voice');

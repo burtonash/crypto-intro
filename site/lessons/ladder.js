@@ -6,7 +6,7 @@ const ep = (n, slug, build, brk, lesson, live = false) => ({ n, slug, build, bre
 
 export const arcs = [
   { n: 1, title: 'Secret writing is fragile', thesis: 'A cipher is good because it survives an attacker who knows how it works, not because it looks scrambled.', episodes: [
-    ep(1, 'secret-messages', 'Secret messages', 'Read it if you know the trick', 'Encoding is not encryption'),
+    ep(1, 'secret-messages', 'Secret messages', 'Read it if you know the trick', 'Encoding is not encryption', true),
     ep(2, 'caesar', 'Caesar cipher', 'Try all 25 shifts', 'Small keyspaces are dead', true),
     ep(3, 'rot13', 'ROT13', 'Apply it twice', 'Some ciphers barely deserve the name'),
     ep(4, 'substitution', 'Substitution cipher', 'Frequency analysis', 'Patterns survive encryption'),
