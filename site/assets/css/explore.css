@@ -1,7 +1,7 @@
 /* Explore Mode — maynard site chrome plus the lesson layout. */
 
 body.explore-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; }
-.explore-body .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.explore-body .wrap { max-width: 960px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
 .explore-body a { color: var(--red); }
 .explore-body :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
 .skip { position: absolute; left: -9999px; }
@@ -100,3 +100,26 @@ footer .mut { color: var(--muted-dark); }
 .explore-body sup { font-size: .7em; line-height: 0; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .hero-actions .btn-ghost { margin-left: 0; }
+.next-cards { display: flex; gap: 14px; flex-wrap: wrap; }
+.next-card { flex: 1 1 240px; }
+.eyebrow .crumb { color: inherit; text-decoration: none; }
+.eyebrow .crumb:hover { text-decoration: underline; }
+
+/* labs index */
+.progress { font-size: 13px; color: var(--ink-soft); margin: 0; }
+.broken { padding: 8px 0 28px; }
+.broken h2, .arc h2 { font-size: 22px; font-weight: 500; margin: 0 0 8px; }
+.broken-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { display: inline-block; font-family: var(--mono); font-weight: 500; font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+.tag-crypto { background: var(--amber); color: var(--on-amber); }
+.tag-live { background: var(--red); color: var(--on-red); margin-left: 8px; vertical-align: 1px; }
+.arcs { padding-bottom: 56px; }
+.arc { padding: 28px 0 8px; border-top: 0.5px solid var(--hairline); }
+.thesis { color: var(--ink-soft); max-width: 64ch; margin: 0 0 6px; }
+.table-wrap { overflow-x: auto; }
+.ladder { border-collapse: collapse; width: 100%; font-size: 15px; margin-top: 10px; }
+.ladder th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: 12px; color: var(--ink-soft); border-bottom: 1px solid var(--ink); padding: 8px 12px 8px 0; }
+.ladder td { border-bottom: 0.5px solid var(--hairline); padding: 9px 12px 9px 0; vertical-align: top; color: var(--ink-soft); }
+.ladder td.n { font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--brown); width: 4ch; }
+.ladder tr.live td { color: var(--ink); }
+.ladder tr.live td:nth-child(2) { font-weight: 500; }

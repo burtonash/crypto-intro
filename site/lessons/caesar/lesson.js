@@ -231,10 +231,4 @@ export const widgets = {
       h('p', { class: 'label', style: { margin: '18px 0 6px' } }, 'aes-128 · 2', h('sup', {}, '128'), ' ≈ 3.4 × 10', h('sup', {}, '38'), ' keys'),
       attackMeter('astronomical', 'no known shortcut'));
   },
-
-  next() {
-    return h('div', { style: { display: 'flex', gap: '14px', 'flex-wrap': 'wrap' } },
-      h('div', { class: 'next-card' }, h('span', { class: 'tag' }, 'ep 03'), h('strong', {}, 'ROT13'), h('span', { class: 'soon' }, 'Apply it twice. Not yet shipped.')),
-      h('div', { class: 'next-card' }, h('span', { class: 'tag' }, 'ep 04'), h('strong', {}, 'Substitution cipher'), h('span', { class: 'soon' }, 'Frequency analysis. Not yet shipped.')));
-  },
 };

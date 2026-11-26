@@ -3,6 +3,7 @@
 // small store, so the Break beat attacks whatever the Build beat produced.
 import { h } from './dom.js';
 import { writeState, stageUrl } from './state.js';
+import { after } from '../../lessons/ladder.js';
 
 export function createStore(initial) {
   let value = { ...initial };
@@ -14,25 +15,33 @@ export function createStore(initial) {
   };
 }
 
-const ROOT = '../../';
-
-function siteNav() {
+/** Site chrome, shared with the labs index. root: path from the page to site/. */
+export function siteNav(root = '../../') {
+  const ROOT = root;
   const plate = h('a', { class: 'plate', href: `${ROOT}about.html`, 'aria-label': 'about ash — unit spec sheet' },
     [...'burton'].map((c) => h('span', {}, c)), [...'ash'].map((c) => h('span', { class: 'a' }, c)));
   return h('nav', {}, h('div', { class: 'wrap' },
     h('a', { class: 'brand', href: `${ROOT}index.html` }, 'ash:~$', h('span', { class: 'cursor' })),
     h('span', { class: 'links' },
       h('a', { href: `${ROOT}index.html` }, 'logbook'),
-      h('a', { href: `${ROOT}index.html#labs`, 'aria-current': 'page' }, 'labs'),
+      h('a', { href: `${ROOT}lessons/`, 'aria-current': 'page' }, 'labs'),
       h('a', { href: `${ROOT}index.html#radio` }, 'radio'),
       h('a', { href: `${ROOT}about.html` }, 'about'),
       plate)));
 }
 
-function siteFooter() {
+export function siteFooter() {
   return h('footer', {}, h('div', { class: 'wrap' },
     h('span', {}, h('span', { class: 'ph' }, 'ash:~$'), ' ', h('span', { class: 'mut' }, 'logout')),
     h('span', { class: 'mut' }, 'set in ibm plex · maynard, in spirit')));
+}
+
+/** Forward links from the ladder (FR-E4): live episodes link, the rest are marked as coming. */
+function nextCards(n) {
+  return h('div', { class: 'next-cards' }, after(n).map((e) => {
+    const body = [h('span', { class: 'tag' }, `ep ${String(e.n).padStart(2, '0')}`), h('strong', {}, e.build), h('span', { class: 'soon' }, `${e.break}.${e.live ? '' : ' Not yet shipped.'}`)];
+    return e.live ? h('a', { class: 'next-card', href: `../${e.slug}/` }, body) : h('div', { class: 'next-card' }, body);
+  }));
 }
 
 export function runExplore(lesson, state) {
@@ -56,14 +65,14 @@ export function runExplore(lesson, state) {
     h('p', { class: 'eyebrow' }, `${String(i + 1).padStart(2, '0')} · ${b.id}`),
     h('h2', { id: `${b.id}-h` }, b.heading),
     b.body.map((p) => h('p', { class: 'beat-copy' }, p)),
-    widgets[b.id] ? widgets[b.id](store) : null));
+    widgets[b.id] ? widgets[b.id](store) : b.id === 'next' ? nextCards(meta.episode) : null));
 
   document.body.replaceChildren(
     h('a', { class: 'skip', href: '#main' }, 'Skip to lesson'),
     siteNav(),
     h('main', { id: 'main' },
       h('div', { class: 'wrap hero' },
-        h('p', { class: 'eyebrow' }, `// labs · arc ${meta.arc} · episode ${ep}`),
+        h('p', { class: 'eyebrow' }, h('a', { href: '../', class: 'crumb' }, '// labs'), ` · arc ${meta.arc} · episode ${ep}`),
         h('h1', {}, meta.title),
         h('p', { class: 'lede' }, meta.promise),
         h('div', { class: 'hero-actions' }, tourLink, stageLink,
