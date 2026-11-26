@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>burtonash — brand guidelines &amp; design system v1.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3EEE2; --ink:#1A1512; --red:#AF1E2D; --brown:#8C4527;
+  --amber:#FFB000; --green:#339900; --green-deep:#256600;
+  --on-ink:#F3EEE2; --on-red:#FDEFE7; --on-brown:#F5E4D8;
+  --on-amber:#442C00; --on-green:#E4F6D8;
+  --ink-soft:#5C5245; --muted-dark:#B5A38F; --hairline:#DDD2BE;
+  --cga-cyan:#06C7D9; --cga-magenta:#ED3FA6; --cga-teal:#0A5F68;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'Cascadia Mono',monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+.wrap{max-width:880px;margin:0 auto;padding:0 28px}
+a{color:var(--red)}
+h1{font-size:44px;font-weight:500;line-height:1.15;margin:0 0 14px}
+h2{font-size:26px;font-weight:500;margin:0 0 6px}
+h3{font-size:18px;font-weight:500;margin:28px 0 8px}
+p{margin:0 0 14px;max-width:66ch}
+.soft{color:var(--ink-soft)}
+.mono{font-family:var(--mono);font-weight:500}
+.eyebrow{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.02em;color:var(--red);margin:0 0 10px}
+ul{margin:0 0 14px;padding-left:20px}
+li{margin-bottom:6px;max-width:64ch}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0 22px}
+th{text-align:left;font-family:var(--mono);font-weight:500;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--ink);padding:6px 10px 6px 0}
+td{border-bottom:0.5px solid var(--hairline);padding:8px 10px 8px 0;vertical-align:top}
+code{font-family:var(--mono);font-weight:500;font-size:.92em;background:#EAE2CF;padding:1px 5px;border-radius:3px}
+pre.term{background:var(--ink);color:var(--on-ink);border-radius:8px;padding:20px 22px;overflow-x:auto;font-family:var(--mono);font-weight:500;font-size:13px;line-height:1.7;margin:16px 0 8px}
+pre.term .c{color:var(--muted-dark)}
+pre.term .a{color:var(--amber)}
+.masthead{background:var(--ink);padding:18px 0}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mastlabel{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--muted-dark)}
+.tiles{display:inline-flex;gap:4px}
+.tile{width:34px;height:58px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:26px}
+.tiles--panel{gap:2px;background:var(--ink);padding:8px;border-radius:6px}
+.tiles--panel .tile{border:1px solid var(--paper);border-radius:2px}
+.tiles--sm .tile{width:18px;height:30px;font-size:12px;border-radius:2px}
+.t-red{background:var(--red);color:var(--on-red)}
+.t-brown{background:var(--brown);color:var(--on-brown)}
+.t-amber{background:var(--amber);color:var(--on-amber)}
+.t-ink{background:var(--ink);color:var(--on-ink);box-shadow:inset 0 0 0 0.5px #3A322B}
+.section{padding:54px 0 30px}
+.divider{display:flex;gap:2px;background:#fff;padding:2px;border-radius:3px;margin:0 0 26px}
+.divider span{flex:1;height:9px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 8px}
+.swatch{border-radius:8px;padding:14px;min-height:112px;display:flex;flex-direction:column;justify-content:space-between}
+.swatch .nm{font-weight:500;font-size:14px}
+.swatch .hx{font-family:var(--mono);font-weight:500;font-size:12px}
+.swatch .rl{font-size:12px;opacity:.85}
+.prompt{font-family:var(--mono);font-weight:500}
+.cursor{display:inline-block;width:9px;height:16px;vertical-align:-2px;margin-left:4px}
+.demo{border:0.5px solid var(--hairline);border-radius:8px;padding:18px;margin:14px 0}
+.demo--dark{background:var(--ink);border:none}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.pill{display:inline-block;font-family:var(--mono);font-weight:500;font-size:11px;padding:2px 8px;border-radius:4px}
+.pass{color:var(--green-deep);font-weight:500}
+.fail{color:var(--red);font-weight:500}
+footer{background:var(--ink);margin-top:60px;padding:14px 0}
+footer .wrap{font-family:var(--mono);font-weight:500;font-size:12px}
+@media print{
+  body{font-size:12px}
+  .section{padding:26px 0 10px;break-inside:avoid-page}
+  h1{font-size:32px}
+  pre.term,.masthead,footer,.tile,.swatch,.divider span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <span class="tiles tiles--panel tiles--sm">
+      <span class="tile t-red">b</span><span class="tile t-red">u</span><span class="tile t-red">r</span><span class="tile t-red">t</span><span class="tile t-red">o</span><span class="tile t-red">n</span><span class="tile t-amber">a</span><span class="tile t-amber">s</span><span class="tile t-amber">h</span>
+    </span>
+    <span class="mastlabel">brand guidelines &amp; design system · v1.1 · july 2026</span>
+  </div>
+</div>
+
+<div class="wrap section" style="padding-top:46px">
+  <p class="eyebrow">// burtonash design system</p>
+  <h1>maynard</h1>
+  <p style="font-size:18px" class="soft">A personal brand built from the machines that started it all: DEC's press style of the seventies and eighties, phosphor-lit terminals, and one IBM XT that never really got switched off.</p>
+  <p>This document is the single source of truth for the burtonash identity. It is written to be read by people and ingested by tools — hand <code>BRAND.md</code> to Claude Design, Claude Code, or anything else that builds on your behalf. The page you are reading is set entirely in the system it describes.</p>
+  <p class="mono" style="font-size:12px;color:var(--ink-soft)">01 foundations · 02 colour · 03 typography · 04 marks · 05 motifs · 06 photography &amp; editorial · 07 voice · 08 applications · 09 tokens</p>
+</div>
+
+<div class="wrap section" id="foundations">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">01</p>
+  <h2>Foundations</h2>
+  <p>burtonash is the personal identity of Ash — product person by day; cryptography, amateur radio, and retro computing by night. It sells nothing. It exists so that everything Ash publishes — a blog post, a lab, a LinkedIn carousel, a video end card — is recognisably one voice.</p>
+  <h3>Personality</h3>
+  <p><strong>Bright, casual, professional.</strong> Confident and playful, never salesy. The tone of someone who will happily explain how a cipher breaks and why that is delightful. If a choice feels like influencer marketing, it is wrong; if it feels like a really good 1976 product brochure, it is right.</p>
+  <h3>Heritage</h3>
+  <p>Every colour and device in this system has a hardware story. The palette is drawn from Digital Equipment Corporation's print and panel design — the PDP-8/e faceplate's earth-and-gold register blocks, the PDP-11 brochure's deep red — plus the phosphor colours of real terminal tubes. Nothing in the system is arbitrary; that is what makes it feel inevitable rather than decorated.</p>
+  <h3>Principles</h3>
+  <ul>
+    <li><strong>Restraint is the style.</strong> DEC's covers were one colour field, white type, and a single framed image. When in doubt, remove something.</li>
+    <li><strong>Homage, never imitation.</strong> Borrow the devices (boxed lowercase letters, register bars, keylines), never the marks themselves.</li>
+    <li><strong>Lowercase is the register.</strong> digital was always lowercase; so is burtonash.</li>
+    <li><strong>Accessibility is part of the aesthetic.</strong> Every text pairing in this document passes WCAG AA; the panel keylines exist because contrast rules and homage happen to agree.</li>
+  </ul>
+</div>
+
+<div class="wrap section" id="colour">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">02</p>
+  <h2>Colour</h2>
+  <p>One core palette — <strong>maynard</strong> — named for DEC's Massachusetts hometown. Six working colours plus their on-colour text partners, and a small reserve of CGA brights for special occasions.</p>
+
+  <h3>Core palette</h3>
+  <div class="swatches">
+    <div class="swatch" style="background:var(--paper);border:0.5px solid var(--hairline);color:var(--ink)"><span class="nm">paper</span><span class="rl">page background, light surfaces</span><span class="hx">#F3EEE2</span></div>
+    <div class="swatch" style="background:var(--ink);color:var(--on-ink)"><span class="nm">warm black</span><span class="rl">body text, dark surfaces, panels</span><span class="hx">#1A1512</span></div>
+    <div class="swatch" style="background:var(--red);color:var(--on-red)"><span class="nm">pdp-11 red</span><span class="rl">signature — primary actions, accents, links, cursor on paper</span><span class="hx">#AF1E2D</span></div>
+    <div class="swatch" style="background:var(--brown);color:var(--on-brown)"><span class="nm">pdp-8 brown</span><span class="rl">secondary fills, tags, earthy anchor</span><span class="hx">#8C4527</span></div>
+    <div class="swatch" style="background:var(--amber);color:var(--on-amber)"><span class="nm">phosphor amber</span><span class="rl">warm bright — fills, tags, terminal text on dark, cursor on dark</span><span class="hx">#FFB000</span></div>
+    <div class="swatch" style="background:var(--green-deep);color:var(--on-green)"><span class="nm">hercules green (deep)</span><span class="rl">green fills, green text on paper</span><span class="hx">#256600</span></div>
+    <div class="swatch" style="background:var(--green);color:var(--on-green)"><span class="nm">hercules green (phosphor)</span><span class="rl">terminal text on dark surfaces only</span><span class="hx">#339900</span></div>
+  </div>
+  <p class="soft" style="font-size:14px">On-colour text partners: <span class="pill" style="background:var(--red);color:var(--on-red)">#FDEFE7 on red</span> <span class="pill" style="background:var(--brown);color:var(--on-brown)">#F5E4D8 on brown</span> <span class="pill" style="background:var(--amber);color:var(--on-amber)">#442C00 on amber</span> <span class="pill" style="background:var(--green-deep);color:var(--on-green)">#E4F6D8 on green</span> <span class="pill" style="background:var(--ink);color:var(--on-ink)">#F3EEE2 on warm black</span> — always the same family as the fill, never generic black or white.</p>
+
+  <h3>CGA reserve</h3>
+  <p>The original phosphor &amp; paper brights are retained as an <strong>occasional vibe kit</strong> — for retro-special moments only: a CGA-themed post, a video end card, the phosphor-switcher easter egg. They never appear in website chrome and never in faceplate tiles.</p>
+  <div class="swatches" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">
+    <div class="swatch" style="background:var(--cga-cyan);color:#04343A;min-height:84px"><span class="nm">cga cyan</span><span class="hx">#06C7D9</span></div>
+    <div class="swatch" style="background:var(--cga-magenta);color:#43092A;min-height:84px"><span class="nm">cga magenta</span><span class="hx">#ED3FA6</span></div>
+    <div class="swatch" style="background:var(--cga-teal);color:#CFEDF1;min-height:84px"><span class="nm">deep teal</span><span class="hx">#0A5F68</span></div>
+  </div>
+
+  <h3>Contrast &amp; accessibility rules</h3>
+  <p>All working pairings were audited against WCAG AA (4.5:1 normal text, 3:1 large text and UI components). Body pairings clear AAA.</p>
+  <table>
+    <tr><th>Pairing</th><th>Ratio</th><th>Verdict</th></tr>
+    <tr><td>warm black on paper (body)</td><td class="mono">15.64</td><td class="pass">AAA</td></tr>
+    <tr><td>pdp-11 red on paper (accents, links)</td><td class="mono">5.95</td><td class="pass">AA</td></tr>
+    <tr><td>pdp-8 brown on paper</td><td class="mono">6.06</td><td class="pass">AA</td></tr>
+    <tr><td>amber on warm black (prompt)</td><td class="mono">9.88</td><td class="pass">AA</td></tr>
+    <tr><td>green #339900 on warm black (terminal)</td><td class="mono">4.91</td><td class="pass">AA</td></tr>
+    <tr><td>muted #B5A38F on warm black</td><td class="mono">7.41</td><td class="pass">AA</td></tr>
+    <tr><td>#FDEFE7 on red (buttons)</td><td class="mono">6.13</td><td class="pass">AA</td></tr>
+    <tr><td>#442C00 on amber (tags)</td><td class="mono">7.14</td><td class="pass">AA</td></tr>
+    <tr><td>#F5E4D8 on brown (tags)</td><td class="mono">5.67</td><td class="pass">AA</td></tr>
+    <tr><td>#E4F6D8 on green-deep #256600 (tags)</td><td class="mono">6.20</td><td class="pass">AA</td></tr>
+    <tr><td>green-deep #256600 on paper (text)</td><td class="mono">6.09</td><td class="pass">AA</td></tr>
+    <tr><td>amber on paper</td><td class="mono">1.58</td><td class="fail">never as text</td></tr>
+    <tr><td>red on warm black</td><td class="mono">2.63</td><td class="fail">decorative only, keyline required</td></tr>
+  </table>
+  <ul>
+    <li><strong>Amber never touches paper as text.</strong> Amber is a fill colour and a dark-background phosphor.</li>
+    <li><strong>Hercules green has two stops.</strong> <code>#339900</code> is phosphor duty only (text on dark); <code>#256600</code> is for fills and for green text on paper.</li>
+    <li><strong>The red cursor blinks only on paper.</strong> On dark surfaces the cursor is amber. Red on warm black is decorative-only and must carry a paper keyline (see the faceplate).</li>
+    <li><strong>Dark fills take light text; bright fills take dark text</strong> — always drawn from the same colour family.</li>
+    <li><strong>Maximum two brights per composition</strong> besides warm black and paper.</li>
+  </ul>
+</div>
+
+<div class="wrap section" id="typography">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">03</p>
+  <h2>Typography</h2>
+  <p>One family, two voices: <strong>IBM Plex</strong>. It is IBM's own typeface — the XT connection is the whole joke — it is free, and it is available on Google Fonts and in Canva, so the system ports everywhere without substitution.</p>
+  <h3>Roles</h3>
+  <table>
+    <tr><th>Face</th><th>Role</th><th>Weights</th></tr>
+    <tr><td><span style="font-family:var(--sans)">IBM Plex Sans</span></td><td>Body copy, headings, UI text</td><td>400 body · 500 headings and emphasis. Nothing heavier.</td></tr>
+    <tr><td><span class="mono">IBM Plex Mono</span></td><td>Wordmark, prompts, labels, tags, code, spec tables</td><td><strong>Text (450)</strong> preferred, Medium (500) where 450 is unavailable · 400 only for long code blocks · 700 reserved for mark letters</td></tr>
+  </table>
+  <ul>
+    <li><strong>Mono never runs at a weight that renders light.</strong> Regular 400 reads thin at small sizes; the working weight is Text/Medium. Self-host Plex Mono Text 450 from IBM's official release for the website; Google Fonts carries 500 as the nearest stop.</li>
+    <li><strong>Never hollow.</strong> Outline or stroked display type is banned in all contexts. Headings are always solid.</li>
+    <li><strong>Marks are lowercase, always.</strong> Headings and body copy use sentence case.</li>
+    <li>A pixel face (Departure Mono, VT323) may appear as garnish in CGA-reserve contexts only — never as body text.</li>
+  </ul>
+  <div class="demo">
+    <p style="font-size:26px;font-weight:500;margin:0 0 6px">Bright ideas, broken ciphers, and the occasional soldering burn</p>
+    <p class="soft" style="margin:0 0 10px">Plex Sans 500 heading over Plex Sans 400 body. Comfortable, warm, unfussy.</p>
+    <p class="mono" style="font-size:13px;margin:0">// plex mono at the working weight — labels, prompts, spec lines</p>
+  </div>
+</div>
+
+<div class="wrap section" id="marks">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">04</p>
+  <h2>Marks</h2>
+  <p>A small family rather than a single logo. Three tools, one grammar.</p>
+
+  <h3>4.1 — Terminal prompt (primary)</h3>
+  <p>The everyday mark: the prompt, set in Plex Mono Medium/Text, with a solid block cursor. Cursor colour is the surface rule made visible — <strong>red on paper, amber on dark</strong>.</p>
+  <div class="two">
+    <div class="demo" style="display:flex;align-items:center"><span class="prompt" style="font-size:18px">ash:~$<span class="cursor" style="background:var(--red)"></span></span></div>
+    <div class="demo demo--dark" style="display:flex;align-items:center"><span class="prompt" style="font-size:18px;color:var(--amber)">ash:~$<span class="cursor" style="background:var(--amber)"></span></span></div>
+  </div>
+  <p class="soft" style="font-size:14px">Usage: site navigation (top left), footers, avatars in text contexts, sign-offs. The full-handle form <code>burtonash:~$</code> is permitted where the short form is ambiguous.</p>
+
+  <h3>4.2 — Tile mark (secondary)</h3>
+  <p>The DEC homage: lowercase bold letters, one per tall tile. A secondary element — it is not primary website chrome — but a fully specified component for avatars, favicons, banners, end cards, and print.</p>
+  <table>
+    <tr><th>Property</th><th>Spec</th></tr>
+    <tr><td>Tile</td><td class="mono">34 × 58 units (ratio ≈ 1 : 1.7), corner radius 3</td></tr>
+    <tr><td>Gap</td><td class="mono">4 units (2 units at favicon scale)</td></tr>
+    <tr><td>Letters</td><td>IBM Plex Mono <strong>Bold (700)</strong>, lowercase, optically centred, ≈ 45% of tile height</td></tr>
+    <tr><td>Forms</td><td class="mono">ash (3 tiles) · burtonash (9 tiles)</td></tr>
+    <tr><td>Scaling</td><td>Scale the whole lockup uniformly; never change the ratio</td></tr>
+  </table>
+
+  <h3>Colourways</h3>
+  <p><strong>digital red</strong> — the primary tile mark. White-warm lowercase in deep red boxes; the closest the system comes to tipping its hat directly.</p>
+  <p style="margin-bottom:20px"><span class="tiles"><span class="tile t-red">a</span><span class="tile t-red">s</span><span class="tile t-red">h</span></span></p>
+  <p><strong>warm black</strong> — the quiet default for documents and letterheads. <strong>faceplate</strong> — the playful trio, in 8/e band order.</p>
+  <p style="margin-bottom:20px"><span class="tiles" style="margin-right:28px"><span class="tile t-ink">a</span><span class="tile t-ink">s</span><span class="tile t-ink">h</span></span><span class="tiles"><span class="tile t-brown">a</span><span class="tile t-amber">s</span><span class="tile t-red">h</span></span></p>
+  <p><strong>Splits</strong> — in two-colour bars, burton takes a neutral or earth colour and <strong>the ash tiles always carry the signature red</strong> (or amber in terminal contexts). The mark tells you where you are.</p>
+  <p style="margin-bottom:8px"><span class="tiles"><span class="tile t-ink">b</span><span class="tile t-ink">u</span><span class="tile t-ink">r</span><span class="tile t-ink">t</span><span class="tile t-ink">o</span><span class="tile t-ink">n</span><span class="tile t-red">a</span><span class="tile t-red">s</span><span class="tile t-red">h</span></span></p>
+  <p class="soft" style="font-size:14px;margin-bottom:8px">warm black + red — the banner split. Also approved: brown + amber (8/e homage) and red + amber (loud; end cards only).</p>
+  <p class="soft" style="font-size:14px;margin-bottom:20px"><strong>The cut-out rule (optional):</strong> on paper surfaces, tile letters may be set in paper <code>#F3EEE2</code> itself — after the original digital logo, whose letters were designed not as white but as cut-outs showing the material beneath.</p>
+
+  <h3>4.3 — Faceplate rendering (dark-surface banner)</h3>
+  <p>The canonical dark-surface treatment: tiles mounted on a warm-black panel, separated by 1-unit <strong>paper keylines</strong>, corner radius 2, panel padding 8, panel radius 6. The keylines are load-bearing — they are what makes red-on-black pass as a UI boundary — and they are the 8/e register made typographic.</p>
+  <p style="margin-bottom:8px"><span class="tiles tiles--panel"><span class="tile t-red">b</span><span class="tile t-red">u</span><span class="tile t-red">r</span><span class="tile t-red">t</span><span class="tile t-red">o</span><span class="tile t-red">n</span><span class="tile t-amber">a</span><span class="tile t-amber">s</span><span class="tile t-amber">h</span></span></p>
+  <p class="soft" style="font-size:14px">Canonical colouring: <strong>red burton, amber ash</strong>. The full-width band is reserved — it appears on flagship moments, not everywhere (see 08). The one standing exception: a <strong>bar-height faceplate</strong> may sit top right in the website navigation, opposite the prompt — tiles ≈ 14 × 24, keylines intact, letters Plex Mono Bold no smaller than 11px. Below that size, switch to the three-tile ash form or drop the letters. The bar must not grow to accommodate it.</p>
+  <div class="demo" style="display:flex;justify-content:space-between;align-items:center;padding:11px 18px">
+    <span class="prompt" style="font-size:14px">ash:~$<span class="cursor" style="background:var(--red);width:8px;height:14px"></span></span>
+    <span style="display:flex;gap:14px;font-size:13px;align-items:center">
+      <span style="border-bottom:2px solid var(--red);padding-bottom:1px;font-weight:500">logbook</span><span>labs</span><span>about</span>
+      <span class="tiles tiles--panel" style="gap:1px;padding:3px;margin-left:4px"><span class="tile t-red" style="width:14px;height:24px;font-size:11px">b</span><span class="tile t-red" style="width:14px;height:24px;font-size:11px">u</span><span class="tile t-red" style="width:14px;height:24px;font-size:11px">r</span><span class="tile t-red" style="width:14px;height:24px;font-size:11px">t</span><span class="tile t-red" style="width:14px;height:24px;font-size:11px">o</span><span class="tile t-red" style="width:14px;height:24px;font-size:11px">n</span><span class="tile t-amber" style="width:14px;height:24px;font-size:11px">a</span><span class="tile t-amber" style="width:14px;height:24px;font-size:11px">s</span><span class="tile t-amber" style="width:14px;height:24px;font-size:11px">h</span></span>
+    </span>
+  </div>
+
+  <h3>4.4 — Reserve marks</h3>
+  <p>CGA colourways of the tile mark (cyan/magenta, amber-terminal trio) exist in the archive and may be used in CGA-reserve contexts only. They never replace the maynard marks.</p>
+</div>
+
+<div class="wrap section" id="motifs">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">05</p>
+  <h2>Motifs</h2>
+  <ul>
+    <li><strong>Register bars.</strong> Segmented colour blocks with 2-unit paper/white hairline gaps (you have seen five of them dividing this document). Use as section dividers, carousel progress markers, loading bars. Blocks draw from the core palette; max five segments.</li>
+    <li><strong>Terminal chrome.</strong> Prompt lines, window title bars, inverse-video status bars. Terminal text on dark surfaces is amber or phosphor green — never red.</li>
+    <li><strong>Keylined panels.</strong> Any colour block sitting on warm black takes a 1-unit paper keyline, after the 8/e faceplate.</li>
+    <li><strong>Duotone photography.</strong> Photos on paper are treated as red/warm-black duotone, after the pdp11 flyer. One photo per composition, framed with a paper border on colour fields.</li>
+    <li><strong>The cover recipe.</strong> One solid colour field (red or warm black), white/paper type, one framed image, tile mark small at the bottom. That is the whole layout.</li>
+    <li><strong>CGA dither.</strong> The cyan/magenta checkerboard texture lives in the reserve — retro-special contexts only.</li>
+  </ul>
+  <p><strong>The seasoning rule:</strong> one motif per composition. If a piece has a register bar, it does not also need a terminal footer and a duotone photo.</p>
+</div>
+
+
+<div class="wrap section" id="photography">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">06</p>
+  <h2>Photography &amp; editorial</h2>
+  <p>The look is 1964–1978 corporate optimism: DEC's staged working scenes and the "austere futurism" of IBM's Noyes-era design programme. Professional yet stylish; the future presented as a genuinely nice place to work. This section complements the identity — it does not change it — and governs photo treatment, documents, and slides.</p>
+
+  <h3>Photographic style</h3>
+  <ul>
+    <li><strong>The machine is the hero; people make it believable.</strong> DEC's brochures showed operators mid-task in real rooms with real furniture — posed-candid, never stocky. Photograph work happening, not products floating.</li>
+    <li><strong>Frontal and three-quarter compositions, tripod-steady.</strong> Panels square to the lens, symmetric where the subject allows, generous headroom. IBM shot the S/360 like architecture, because Noyes designed it like architecture.</li>
+    <li><strong>Warm film palette.</strong> Kodachrome-era warmth: creams, ambers, deep reds, browns. Grade toward maynard; desaturate hues the palette does not own. Saturation belongs to the machine's panels — exactly the role the S/360's coloured doors played in a grey room.</li>
+    <li><strong>Quiet backgrounds.</strong> Seamless paper, plain walls, tidy benches. Clutter is the enemy of optimism.</li>
+    <li><strong>Framed on colour.</strong> On solid fields, photos sit inside a paper border — the pdp-11 brochure construction.</li>
+    <li><strong>Treatments.</strong> Red/ink duotone (see 05) for graphic and cover contexts; full colour, warm-graded, for editorial interiors.</li>
+    <li><strong>Shooting your own kit</strong> (the bench, the radios, the retro machines): warm directional light, hands in frame doing something real, nameplates and badges legible, one subject per frame.</li>
+  </ul>
+
+  <h3>Document &amp; slide layout</h3>
+  <ul>
+    <li><strong>Covers</strong> use the cover recipe (05): one solid field, paper type, one framed image, small mark. This is the pdp-11 brochure's construction, adopted whole.</li>
+    <li><strong>Interiors</strong>: one disciplined grid, generous margins, Plex Sans 500 headlines set large and calm, numbered figures with mono captions. White space is a feature, not a leftover.</li>
+    <li><strong>Spec tables are design elements.</strong> The datasheet is the house literary form — tables get the same care as headlines.</li>
+    <li><strong>Slides</strong>: one idea per slide. Title slide = cover recipe; content slides = one figure with a mono caption, or one table; the register bar is the progress indicator.</li>
+    <li><strong>Tone</strong>: confident declaratives. Optimism expressed as precision, never as exclamation marks.</li>
+  </ul>
+
+  <h3>Heritage notes</h3>
+  <p class="soft" style="font-size:14px">IBM appointed Eliot Noyes Consultant Director of Design in 1956; his programme coordinated everything from trademark and graphics to exhibitions, interiors, machines, and buildings, with Paul Rand, George Nelson, Eero Saarinen and the Eames Office contributing. The System/360 (1964) shipped with customer-chosen coloured panels — red and blue the favourites, yellow, green, white and grey also offered — and launched simultaneously in 165 cities. DEC's digital logo was designed in 1957 by Elliot Hendrickson, its boxes echoing the proportions of DEC's plug-in System Modules, its letters conceived as cut-outs showing the material beneath. In the early seventies DEC colour-coded its product lines — burnt orange and goldenrod for the PDP-8, maroon and orange for the PDP-11. maynard's structure is not merely inspired by this history; it re-inhabits it.</p>
+</div>
+
+<div class="wrap section" id="voice">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">07</p>
+  <h2>Voice</h2>
+  <p>Write like the best 1976 datasheet: plain, specific, quietly funny. Explain what a thing does; never sell it. Enthusiasm shows up as precision, not exclamation marks.</p>
+  <table>
+    <tr><th>Do</th><th>Don't</th></tr>
+    <tr><td>lowercase marks: <span class="mono">ash:~$</span>, burtonash</td><td>Capitalised or spaced wordmarks</td></tr>
+    <tr><td>Sentence case headings and body</td><td>Title Case, ALL CAPS (except tiny mono labels)</td></tr>
+    <tr><td>Solid headings, always</td><td>Hollow / outlined / stroked type — banned</td></tr>
+    <tr><td>One bright accent doing one job</td><td>Three brights fighting in one composition</td></tr>
+    <tr><td>Datasheet humour (model numbers, errata, protocols)</td><td>Hustle-culture tone, "unlock", "leverage", "🚀"</td></tr>
+  </table>
+</div>
+
+<div class="wrap section" id="applications">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">08</p>
+  <h2>Applications</h2>
+  <h3>Website</h3>
+  <ul>
+    <li>Theme: maynard throughout. Paper pages, warm-black body text, red for links, actions, and the nav underline.</li>
+    <li>Navigation: terminal prompt wordmark top left with red cursor. The tile mark is <strong>not</strong> site chrome.</li>
+    <li>Terminal elements (footer prompt, code blocks, the labs console) run on warm black with amber, phosphor green <span class="mono">#339900</span>, and paper text.</li>
+    <li><strong>The faceplate band is earned, not default.</strong> It appears as a full-width warm-black band (band above the footer, or a masthead) on flagship pages only: the spec-sheet about page, series landings, launch posts. Everyday pages omit it — scarcity is what makes it read as a signature. The standing exception is the bar-height faceplate top right in the navigation (spec in 4.3), which may appear sitewide.</li>
+    <li>Category tags: amber (crypto), brown (radio), green-deep (retro) — mono, working weight.</li>
+    <li>Easter egg: the phosphor switcher (amber / green / CGA cyan) may live on terminal surfaces; cyan here is a reserve appearance and stays off page chrome.</li>
+  </ul>
+  <h3>Carousels &amp; title cards</h3>
+  <p>Use the cover recipe: red or warm-black field, paper type, one framed image or diagram, small tile mark bottom centre, register bar as the page-progress indicator. On LinkedIn this will look like nothing else on the platform, which is the point.</p>
+  <h3>The spec-sheet about page</h3>
+  <p>Ash is written up as a product datasheet: model no., first shipped, I/O, supported protocols, known errata. Peak "not a wanker" energy; the faceplate band is its masthead.</p>
+  <h3>Tooling notes</h3>
+  <ul>
+    <li><strong>Claude Design / Claude Code:</strong> supply <code>BRAND.md</code> as context; the tokens block below is copy-paste ready.</li>
+    <li><strong>Canva:</strong> Brand Kit = the six core hexes + the three reserve hexes; fonts IBM Plex Sans and IBM Plex Mono.</li>
+    <li><strong>Print / PDF:</strong> this page carries print CSS — print to PDF from any browser for a faithful copy.</li>
+  </ul>
+</div>
+
+<div class="wrap section" id="tokens">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">09</p>
+  <h2>Tokens</h2>
+  <p>The entire system as CSS custom properties. This block is the machine-readable contract; everything above is commentary on it.</p>
+<pre class="term"><span class="c">/* burtonash — maynard design tokens v1.1 */</span>
+<span class="a">:root</span> {
+  <span class="c">/* core */</span>
+  --paper:      #F3EEE2;   --ink:        #1A1512;
+  --red:        #AF1E2D;   --brown:      #8C4527;
+  --amber:      #FFB000;   --green:      #339900;  <span class="c">/* dark-surface text only */</span>
+  --green-deep: #256600;   <span class="c">/* fills + text on paper */</span>
+
+  <span class="c">/* on-colour text — same family as the fill */</span>
+  --on-ink:   #F3EEE2;  --on-red:   #FDEFE7;  --on-brown: #F5E4D8;
+  --on-amber: #442C00;  --on-green: #E4F6D8;
+
+  <span class="c">/* support */</span>
+  --ink-soft:   #5C5245;  <span class="c">/* muted text on paper  */</span>
+  --muted-dark: #B5A38F;  <span class="c">/* muted text on ink    */</span>
+  --hairline:   #DDD2BE;  <span class="c">/* borders on paper     */</span>
+
+  <span class="c">/* cga reserve — occasional vibe only; never chrome, never faceplate */</span>
+  --cga-cyan: #06C7D9;  --cga-magenta: #ED3FA6;  --cga-teal: #0A5F68;
+
+  <span class="c">/* type */</span>
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  <span class="c">/* mono working weight: Text 450 (self-hosted) or Medium 500 */</span>
+  <span class="c">/* mono 700 reserved for tile-mark letters */</span>
+
+  <span class="c">/* tile mark construction */</span>
+  --tile-w: 34;  --tile-h: 58;  --tile-gap: 4;  --tile-radius: 3;
+  --panel-keyline: 1;  --panel-pad: 8;  --panel-radius: 6;
+}</pre>
+  <p class="soft" style="font-size:14px">Rules that travel with the tokens: amber is never text on paper · #339900 only on dark · red cursor on paper, amber cursor on dark · dark fills take light family text · max two brights per composition · ash tiles carry the signature colour in splits · faceplate band on flagship surfaces only.</p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span style="color:var(--amber)">ash:~$</span> <span style="color:var(--muted-dark)">logout &nbsp;·&nbsp; set in ibm plex &nbsp;·&nbsp; maynard, in spirit</span>
+  </div>
+</footer>
+
+</body>
+</html>

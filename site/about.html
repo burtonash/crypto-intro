@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>burtonash — about (unit spec sheet)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3EEE2; --ink:#1A1512; --red:#AF1E2D; --brown:#8C4527;
+  --amber:#FFB000; --green:#339900; --green-deep:#256600;
+  --on-ink:#F3EEE2; --on-red:#FDEFE7; --on-brown:#F5E4D8;
+  --on-amber:#442C00; --on-green:#E4F6D8;
+  --ink-soft:#5C5245; --muted-dark:#B5A38F; --hairline:#DDD2BE;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+a{color:var(--red)}
+a:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+nav{border-bottom:0.5px solid var(--hairline)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{font-family:var(--mono);font-weight:500;font-size:15px;color:var(--ink);text-decoration:none}
+.cursor{display:inline-block;width:9px;height:15px;background:var(--red);margin-left:4px;vertical-align:-2px;animation:blink 1.1s step-end infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+.links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.links a{font-size:14px;color:var(--ink);text-decoration:none}
+.links a:hover{color:var(--red)}
+.links a[aria-current]{border-bottom:2px solid var(--red);padding-bottom:2px;font-weight:500}
+.plate{display:inline-flex;gap:1px;background:var(--ink);padding:3px;border-radius:3px;text-decoration:none;margin-left:4px}
+.plate span{width:14px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;background:var(--red);color:var(--on-red);border:1px solid var(--paper);border-radius:1px}
+.plate span.a{background:var(--amber);color:var(--on-amber)}
+
+.hero{padding:64px 0 28px}
+.eyebrow{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--red);margin:0 0 12px}
+h1{font-size:clamp(26px,4.6vw,38px);font-weight:500;line-height:1.2;margin:0 0 14px}
+.lede{color:var(--ink-soft);max-width:56ch;margin:0 0 8px}
+
+.spec{padding:8px 0 56px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:10px}
+th{text-align:left;font-family:var(--mono);font-weight:500;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--ink);padding:8px 12px 8px 0}
+td{border-bottom:0.5px solid var(--hairline);padding:10px 12px 10px 0;vertical-align:top}
+td:first-child{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--brown);width:34%}
+
+.band{background:var(--ink);padding:16px 0}
+.band .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.panel{display:inline-flex;gap:2px;background:var(--ink);padding:8px;border-radius:6px}
+.panel span{width:34px;height:58px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:26px;background:var(--red);color:var(--on-red);border:1px solid var(--paper);border-radius:2px}
+.panel span.a{background:var(--amber);color:var(--on-amber)}
+.bandlabel{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--muted-dark)}
+@media (max-width:560px){.panel span{width:22px;height:38px;font-size:16px}}
+
+footer{background:var(--ink);border-top:0.5px solid #3A322B;padding:12px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-weight:500;font-size:12px}
+footer .ph{color:var(--amber)}
+footer .mut{color:var(--muted-dark)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">ash:~$<span class="cursor"></span></a>
+    <span class="links">
+      <a href="index.html">logbook</a>
+      <a href="index.html#labs">labs</a>
+      <a href="index.html#radio">radio</a>
+      <a href="about.html" aria-current="page">about</a>
+      <a class="plate" href="about.html" aria-label="about ash — unit spec sheet"><span>b</span><span>u</span><span>r</span><span>t</span><span>o</span><span>n</span><span class="a">a</span><span class="a">s</span><span class="a">h</span></a>
+    </span>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow">// unit spec sheet</p>
+    <h1>ash — model no. ASH-76</h1>
+    <p class="lede">General-purpose product person with cryptographic co-processor. First shipped in the IBM XT era; continuously patched since. This page is maintained in the style of the finest 1976 datasheets, because the driest page on a personal site should be the most fun one.</p>
+  </div>
+
+  <div class="wrap spec">
+    <table>
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>designation</td><td>ash (long form: burtonash)</td></tr>
+      <tr><td>first shipped</td><td>IBM XT era; original firmware written in curiosity</td></tr>
+      <tr><td>primary function</td><td>Head of product, contact centre technology</td></tr>
+      <tr><td>i/o ports</td><td>logbook · labs · radio · LinkedIn</td></tr>
+      <tr><td>supported languages</td><td>Node.js, Python, RF (40 m band, licensed)</td></tr>
+      <tr><td>compatible environments</td><td>WSL2/Ubuntu, Raspberry Pi, Windows</td></tr>
+      <tr><td>certified modules</td><td>AWS SAA-C03, AWS Cloud Practitioner, ISC² CC</td></tr>
+      <tr><td>display modes</td><td>CGA palette 1 (nostalgic), phosphor amber (preferred)</td></tr>
+      <tr><td>known errata</td><td>retro computing habit — investigated, declared incurable, reclassified as a feature</td></tr>
+      <tr><td>service notes</td><td>runs indefinitely on tea; do not expose to hustle-culture vocabulary</td></tr>
+    </table>
+  </div>
+</main>
+
+<div class="band">
+  <div class="wrap">
+    <span class="panel" aria-hidden="true"><span>b</span><span>u</span><span>r</span><span>t</span><span>o</span><span>n</span><span class="a">a</span><span class="a">s</span><span class="a">h</span></span>
+    <span class="bandlabel">labs · logbook · radio</span>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span><span class="ph">ash:~$</span> <span class="mut">logout</span></span>
+    <span class="mut">set in ibm plex · maynard, in spirit</span>
+  </div>
+</footer>
+
+</body>
+</html>
