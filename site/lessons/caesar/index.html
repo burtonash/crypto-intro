@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caesar cipher — build → break · burtonash</title>
+<link rel="preload" href="../../assets/fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/maynard.css">
+<link rel="stylesheet" href="../../assets/css/explore.css">
+<link rel="stylesheet" href="../../assets/css/stage.css">
+<link rel="stylesheet" href="caesar.css">
+</head>
+<body class="explore-body">
+<noscript><div class="wrap"><h1>Caesar cipher</h1><p>Hide a message by shifting letters. The interactive demo needs JavaScript.</p></div></noscript>
+<script type="module">
+  import { boot } from '../../assets/js/boot.js';
+  import * as lesson from './lesson.js';
+  // Load fonts before first render so Stage frames are identical on every take.
+  await Promise.all(['400 16px "IBM Plex Sans"', '500 16px "IBM Plex Sans"', '450 16px "IBM Plex Mono"', '500 16px "IBM Plex Mono"', '700 16px "IBM Plex Mono"']
+    .map((f) => document.fonts.load(f))).catch(() => {});
+  boot(lesson);
+</script>
+</body>
+</html>

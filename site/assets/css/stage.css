@@ -1,0 +1,112 @@
+/* Stage Mode — the maynard Stage extension (BRAND.md §Extensions, v1.2).
+   Frames render at true pixel size; sizes use container units so the brand's
+   clamp() tokens resolve against the frame, not the browser window. */
+
+html, body.stage-body { margin: 0; height: 100%; }
+body.stage-body { background: #2A2420; color: var(--on-ink); overflow: hidden; display: flex; flex-direction: column; }
+
+.stage-viewport { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
+.stage-scaler { position: relative; flex: none; }
+
+.stage-frame {
+  --stage-title: clamp(3rem, 10cqi, 8rem);
+  --stage-label: clamp(1.5rem, 5cqi, 3rem);
+  --stage-code: clamp(1.25rem, 4cqi, 2.5rem);
+  --stage-border: 6px solid var(--ink);
+  --stage-radius: 12px;
+  --stage-safe-x: 7%;
+  --stage-safe-y: 12%;
+  --stage-fg: var(--ink);
+  --stage-soft: var(--ink-soft);
+
+  position: absolute; top: 0; left: 0; transform-origin: 0 0;
+  container-type: size;
+  overflow: hidden;
+  background: var(--paper); color: var(--stage-fg);
+  font-family: var(--sans);
+}
+.stage-frame[data-ratio="vertical"] { --stage-safe-y: 15%; }
+
+/* surfaces */
+.surface-paper { background: var(--paper); }
+.surface-ink { background: var(--ink); --stage-fg: var(--on-ink); --stage-soft: var(--muted-dark); }
+.surface-cover-red { background: var(--red); --stage-fg: var(--on-red); --stage-soft: var(--on-red); }
+.surface-cover-ink { background: var(--ink); --stage-fg: var(--on-ink); --stage-soft: var(--muted-dark); }
+
+/* bands: the top/bottom unsafe zones carry only non-critical furniture */
+.band { position: absolute; left: var(--stage-safe-x); right: var(--stage-safe-x); display: flex; flex-direction: column; justify-content: center; gap: 2.2cqh; }
+.band-top { top: 0; height: var(--stage-safe-y); }
+.band-bottom { bottom: 0; height: var(--stage-safe-y); align-items: center; }
+.band-label { font-family: var(--mono); font-weight: var(--mono-w); font-size: clamp(1rem, 2.6cqi, 1.75rem); color: var(--stage-soft); }
+
+.register { display: flex; gap: 4px; background: #fff; padding: 4px; border-radius: 3px; }
+.register span { flex: 1; height: 14px; background: var(--hairline); }
+.register span.done { background: var(--ink); }
+.register span.now { background: var(--red); }
+.on-ink .register { background: var(--paper); }
+.on-ink .register span { background: #4A4038; }
+.on-ink .register span.done { background: var(--muted-dark); }
+.on-ink .register span.now { background: var(--amber); }
+
+.mark { display: inline-flex; gap: 6px; }
+.mark span { width: 48px; height: 82px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px;
+  font-family: var(--mono); font-weight: 700; font-size: 37px; }
+.mark-ink span { background: var(--ink); color: var(--on-ink); }
+.mark-red span { background: var(--red); color: var(--on-red); box-shadow: 0 0 0 2px var(--paper); }
+
+/* the teaching area */
+.safe {
+  position: absolute; inset: var(--stage-safe-y) var(--stage-safe-x);
+  display: flex; flex-direction: column; gap: 4cqh;
+}
+.stage-frame[data-ratio="wide"] .safe { gap: 3cqh; }
+.st-eyebrow { margin: 0; font-family: var(--mono); font-weight: var(--mono-w); font-size: var(--stage-code); color: var(--stage-soft); }
+.st-title { margin: 0; font-weight: 500; font-size: var(--stage-title); line-height: 1.04; letter-spacing: -0.015em; text-wrap: balance; }
+.st-visual { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqh; }
+.st-line { margin: 0; font-size: var(--stage-label); line-height: 1.25; text-wrap: pretty; }
+
+/* framed panel: the cover recipe's "one framed image" */
+.framed { background: var(--ink); border: 14px solid var(--paper); border-radius: var(--stage-radius); padding: 5cqi 6cqi;
+  font-family: var(--mono); font-weight: 500; color: var(--amber); font-size: calc(var(--stage-title) * 1.25); letter-spacing: .08em; line-height: 1; }
+
+/* stage card: flat keylined panel, no drop shadow */
+.stage-card { border: var(--stage-border); border-radius: var(--stage-radius); padding: 4cqi; background: var(--paper); color: var(--ink); }
+.on-ink .stage-card { border-color: var(--paper); background: var(--ink); color: var(--on-ink); }
+
+/* tiles at stage scale */
+.stage-frame .tiles { --tile-w: 11cqi; --tile-h: 18.7cqi; --tile-fs: 9cqi; --tile-gap: 1.4cqi; --tile-border: 5px; --tile-r: 6px; }
+.stage-frame[data-ratio="wide"] .tiles { --tile-w: 7cqi; --tile-h: 11.9cqi; --tile-fs: 5.6cqi; --tile-gap: 1cqi; }
+.stage-frame[data-ratio="square"] .tiles { --tile-w: 9cqi; --tile-h: 13cqi; --tile-fs: 7.5cqi; }
+.stage-frame .cast { --cast-size: 11cqi; font-size: var(--stage-label); }
+.stage-frame[data-ratio="wide"] .cast { --cast-size: 7cqi; }
+.stage-frame .meter { font-size: clamp(1.25rem, 3.4cqi, 2.4rem); width: 100%; }
+.stage-frame .meter-seg { padding: 1.4cqh 0; }
+.stage-frame .meter-caption { margin: 1.5cqh 0 0; font-size: var(--stage-code); text-align: center; }
+.stage-frame .meter-wrap { width: 100%; }
+
+/* guides: show the safe area for framing checks */
+.guides { display: none; position: absolute; inset: 0; pointer-events: none; }
+.show-guides .guides { display: block; }
+.guides span { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(45deg, rgba(6,199,217,.18) 0 12px, transparent 12px 24px); }
+.guides span:first-child { top: 0; height: var(--stage-safe-y); border-bottom: 3px dashed var(--cga-cyan); }
+.guides span:last-child { bottom: 0; height: var(--stage-safe-y); border-top: 3px dashed var(--cga-cyan); }
+.show-guides .safe { outline: 3px dashed var(--cga-cyan); outline-offset: 0; }
+
+/* animation: scenes animate on entry; .paused freezes, .still (and reduced motion) shows the end state */
+@keyframes st-rise { from { transform: translateY(40%); opacity: 0; } }
+@keyframes st-fade { from { opacity: 0; } }
+@keyframes st-pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.08); } }
+.paused, .paused * { animation-play-state: paused !important; }
+.still .stage-frame, .still .stage-frame * { animation-delay: 0s !important; animation-duration: 0s !important; transition: none !important; }
+
+/* HUD: outside the frame, never captured if you crop to the frame */
+.stage-hud { flex: none; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; justify-content: center;
+  padding: 8px 16px; font-size: 12px; color: var(--muted-dark); background: var(--ink); border-top: 1px solid #3A322B; }
+.stage-hud[hidden] { display: none; }
+.hud-status { color: var(--amber); min-width: 13ch; }
+.hud-group { display: inline-flex; gap: 4px; }
+.stage-hud button, .stage-hud a { font: inherit; color: var(--on-ink); background: transparent; border: 1px solid #4A4038; border-radius: 4px; padding: 3px 8px; cursor: pointer; text-decoration: none; }
+.stage-hud button[aria-pressed="true"] { background: var(--amber); color: var(--on-amber); border-color: var(--amber); }
+.stage-hud button:hover, .stage-hud a:hover { border-color: var(--amber); }
+.stage-hud :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.hud-keys { flex-basis: 100%; text-align: center; }

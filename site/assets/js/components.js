@@ -1,0 +1,52 @@
+// Shared demo components (PRD §7.5), rendered identically in Explore and Stage.
+// Size and surface come from CSS custom properties on the container.
+import { h } from './dom.js';
+
+/** A row of letter tiles. kind: plain | public | secret | ink | red. Spaces become gaps. */
+export function tiles(text, kind = 'plain', { stagger = false, label } = {}) {
+  return h('span', { class: 'tiles', role: 'img', 'aria-label': label || text },
+    Array.from(text, (ch, i) => h('span', {
+      class: `tile ${ch === ' ' ? 't-gap' : 't-' + kind}`,
+      'aria-hidden': 'true',
+      style: stagger ? { '--i': i } : null,
+    }, ch === ' ' ? '' : ch)));
+}
+
+const SHAPES = {
+  alice: () => h('circle', { cx: 22, cy: 22, r: 22, fill: 'var(--cast-alice)' }),
+  bob: () => h('rect', { x: 1, y: 1, width: 42, height: 42, fill: 'var(--cast-bob)' }),
+  eve: () => h('polygon', { points: '22,0 44,42 0,42', fill: 'var(--cast-eve)' }),
+};
+const INITIAL = { alice: ['a', 29, 'var(--on-alice)'], bob: ['b', 29, 'var(--on-bob)'], eve: ['e', 37, 'var(--on-eve)'] };
+
+/** A cast member: shape + initial + optional name beside it, in ink (never in the cast colour). */
+export function cast(role, label = role) {
+  const [ch, y, fill] = INITIAL[role];
+  return h('span', { class: `cast cast-${role}` },
+    h('svg', { viewBox: '-1 -1 46 46', 'aria-hidden': 'true' },
+      SHAPES[role](),
+      h('text', { x: 22, y, 'text-anchor': 'middle', 'font-size': 20, fill }, ch)),
+    label ? h('span', { class: 'cast-label' }, label) : null);
+}
+
+export const COST_LEVELS = ['tiny', 'small', 'big', 'astronomical'];
+
+/** AttackMeter: Tiny / Small / Big / Astronomical with one segment lit. */
+export function attackMeter(level, caption) {
+  return h('div', { class: 'meter-wrap' },
+    h('div', { class: 'meter', role: 'img', 'aria-label': `attack cost: ${level}` },
+      COST_LEVELS.map((l) => h('span', { class: `meter-seg${l === level ? ' on' : ''}` }, l))),
+    caption ? h('p', { class: 'meter-caption mono' }, caption) : null);
+}
+
+/** Register bar used as a progress indicator: one segment per scene. */
+export function registerProgress(count, current) {
+  return h('div', { class: 'register', role: 'progressbar', 'aria-valuemin': 1, 'aria-valuemax': count, 'aria-valuenow': current + 1 },
+    Array.from({ length: count }, (_, i) => h('span', { class: i < current ? 'done' : i === current ? 'now' : '' })));
+}
+
+/** The ash tile mark (3 tiles). colourway: ink | red */
+export function tileMark(colourway = 'ink') {
+  return h('span', { class: `mark mark-${colourway}`, 'aria-label': 'ash' },
+    ['a', 's', 'h'].map((c) => h('span', { 'aria-hidden': 'true' }, c)));
+}
