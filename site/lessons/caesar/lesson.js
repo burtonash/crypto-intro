@@ -3,7 +3,7 @@
 // copy for each beat), `scenes` renders Stage frames, `widgets` plugs the
 // interactive demo into the Explore page.
 import { h } from '../../assets/js/dom.js';
-import { tiles, cast, attackMeter } from '../../assets/js/components.js';
+import { tiles, cast, attackMeter, framed, keyArrow, flow, triesGrid, meterPair } from '../../assets/js/components.js';
 import { ALPHABET, encrypt, decrypt, bruteForce, normaliseShift } from './caesar.js';
 
 export const meta = {
@@ -72,7 +72,7 @@ export const scenes = {
     surface: 'cover-red',
     duration: 3500,
     title: () => 'This looks scrambled.',
-    visual: (c) => h('div', { class: 'framed cz-pop' }, encrypt(stageText(c), stageShift(c))),
+    visual: (c) => framed(encrypt(stageText(c), stageShift(c))),
     // The silent clip reaches the break in ~13s; the narrated tour takes longer, so it doesn't promise a time.
     line: (c) => (c.tour ? 'Let\'s break it.' : 'Let\'s break it in 20 seconds.'),
   },
@@ -90,7 +90,7 @@ export const scenes = {
       const run = Array.from({ length: n + s }, (_, i) => ALPHABET[i % 26]).join('');
       return h('div', { class: 'cz-strip' },
         tiles(plain, 'plain', { label: `plain letters ${plain}` }),
-        h('div', { class: 'cz-key mono' }, `↓ shift +${s}`),
+        keyArrow(`↓ shift +${s}`),
         h('div', { class: 'cz-window', style: { '--n': n } },
           h('div', { class: 'cz-slide', style: { '--shift': s } },
             tiles(run, 'public', { label: `become ${encrypt(plain, s)}` }))));
@@ -109,10 +109,7 @@ export const scenes = {
     visual: (c) => {
       const t = stageText(c);
       const s = stageShift(c);
-      return h('div', { class: 'cz-flow' },
-        h('div', { class: 'cz-party' }, cast('alice'), tiles(t, 'plain')),
-        h('div', { class: 'cz-key mono' }, `↓ shift +${s}`),
-        h('div', { class: 'cz-party' }, tiles(encrypt(t, s), 'public', { stagger: true }), cast('bob')));
+      return flow([cast('alice'), tiles(t, 'plain')], keyArrow(`↓ shift +${s}`), [tiles(encrypt(t, s), 'public', { stagger: true }), cast('bob')]);
     },
     line: (c) => `Bob knows the key. He shifts back ${stageShift(c)} and reads ${stageText(c)}.`,
   },
@@ -125,9 +122,7 @@ export const scenes = {
     title: () => 'Try all 25 shifts.',
     visual: (c) => {
       const tries = bruteForce(encrypt(stageText(c), stageShift(c)));
-      return h('ol', { class: 'cz-tries mono', 'aria-label': 'all 25 decryptions' },
-        tries.map((t, i) => h('li', { class: t.best ? 'best' : '', style: { '--i': i } },
-          h('span', { class: 'k' }, String(t.shift).padStart(2, '0')), t.text)));
+      return triesGrid(tries.map((t) => ({ key: String(t.shift).padStart(2, '0'), text: t.text, best: t.best })), 'all 25 decryptions');
     },
     line: (c) => {
       const best = bruteForce(encrypt(stageText(c), stageShift(c))).find((t) => t.best);
@@ -140,9 +135,7 @@ export const scenes = {
     surface: 'paper',
     duration: 5000,
     title: () => 'A tiny keyspace is not security.',
-    visual: () => h('div', { class: 'cz-meters' },
-      h('div', {}, h('p', { class: 'cz-meter-name mono' }, 'caesar · 25 keys'), attackMeter('tiny')),
-      h('div', {}, h('p', { class: 'cz-meter-name mono' }, 'aes-128 · 2', h('sup', {}, '128'), ' keys'), attackMeter('astronomical'))),
+    visual: () => meterPair(['caesar · 25 keys', 'tiny'], [['aes-128 · 2', h('sup', {}, '128'), ' keys'], 'astronomical']),
     line: () => 'Real ciphers have too many keys to try one by one.',
   },
 
@@ -151,7 +144,7 @@ export const scenes = {
     surface: 'cover-ink',
     duration: 4000,
     title: () => 'What if every letter had its own mapping?',
-    visual: () => h('div', { class: 'framed cz-pop cz-small' }, '4 × 10', h('sup', {}, '26'), ' keys'),
+    visual: () => framed(['4 × 10', h('sup', {}, '26'), ' keys'], { small: true }),
     line: () => 'Next: the substitution cipher. Bigger. Still broken.',
   },
 };

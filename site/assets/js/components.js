@@ -50,3 +50,23 @@ export function tileMark(colourway = 'ink') {
   return h('span', { class: `mark mark-${colourway}`, 'aria-label': 'ash' },
     ['a', 's', 'h'].map((c) => h('span', { 'aria-hidden': 'true' }, c)));
 }
+
+// ---- Stage scene kit: the recurring visuals, so lessons only write what's new ----
+
+/** Paper-bordered ink panel: the cover recipe's "one framed image". */
+export const framed = (content, { small = false } = {}) => h('div', { class: `framed st-pop${small ? ' st-small' : ''}` }, content);
+
+/** A muted arrow label between rows, e.g. "↓ shift +3". */
+export const keyArrow = (text) => h('div', { class: 'st-key mono' }, text);
+
+/** Sender → message → receiver. rows: [node, node, ...] stacked (vertical) or wrapped in rows (square/wide). */
+export const flow = (...rows) => h('div', { class: 'st-flow' }, rows.map((r) => (Array.isArray(r) ? h('div', { class: 'st-party' }, r) : r)));
+
+/** Brute-force grid: every candidate fades in, then the hit lights up. items: [{ key, text, best }] */
+export const triesGrid = (items, label = 'every candidate') => h('ol', { class: 'st-tries mono', 'aria-label': label },
+  items.map((t, i) => h('li', { class: t.best ? 'best' : '', style: { '--i': i } }, h('span', { class: 'k' }, t.key), t.text)));
+
+/** Toy vs real: two labelled attack meters. */
+export const meterPair = ([nameA, levelA], [nameB, levelB]) => h('div', { class: 'st-meters' },
+  h('div', {}, h('p', { class: 'st-meter-name mono' }, nameA), attackMeter(levelA)),
+  h('div', {}, h('p', { class: 'st-meter-name mono' }, nameB), attackMeter(levelB)));
