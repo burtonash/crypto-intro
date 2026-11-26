@@ -199,6 +199,8 @@ CGA reserve, because she is the intruder who doesn't belong in the palette.
 - Cast colours are identity, not decoration, so they don't count toward the
   two-brights budget. Everything else on a Stage frame still does: at most
   two brights beyond the cast.
+- Bob's orange is a fill only, never text (3.14:1 on paper). Names and labels
+  for every cast member sit beside the shape in ink.
 - No more than three cast members on screen at once.
 - Cast shapes on ink take a 1-unit paper keyline (Alice 2.56, as for red).
 - Cards are flat, keylined panels: thick ink border, 12px radius, no drop
