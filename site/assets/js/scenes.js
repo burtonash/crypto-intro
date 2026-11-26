@@ -3,8 +3,12 @@
 // drive it from buttons.
 
 export class SceneStepper {
-  constructor(ids, { start = 0, onChange = () => {}, durationOf = () => 4000, onState = () => {} } = {}) {
+  constructor(ids, { start = 0, onChange = () => {}, durationOf = () => 4000, onState = () => {}, gate = () => null } = {}) {
     this.onState = onState;
+    // gate(id) may return a promise: autoplay holds the scene until it resolves
+    // (e.g. browser speech running longer than its estimate).
+    this.gate = gate;
+    this.token = 0;
     this.ids = ids;
     this.index = Math.max(0, Math.min(ids.length - 1, start));
     this.onChange = onChange;
@@ -23,6 +27,7 @@ export class SceneStepper {
     const changed = next !== this.index;
     this.index = next;
     this.finished = false;
+    this.holding = false;
     if (!this.playing) this.remaining = 0;
     this.onChange(this.id, this.index);
     if (this.playing) this._schedule(this.durationOf(this.id));
@@ -36,13 +41,15 @@ export class SceneStepper {
     if (this.playing) return;
     if (this.finished) this.go(0);
     this.playing = true;
-    this._schedule(this.remaining > 0 ? this.remaining : this.durationOf(this.id));
+    // If we were paused while waiting on the gate, re-check it straight away.
+    this._schedule(this.holding ? 0 : this.remaining > 0 ? this.remaining : this.durationOf(this.id));
     this.onState();
   }
   pause() {
     if (!this.playing) return;
     this.playing = false;
     clearTimeout(this.timer);
+    this.token++;
     this.remaining = Math.max(0, this.remaining - (performance.now() - this.startedAt));
     this.onState();
   }
@@ -52,8 +59,12 @@ export class SceneStepper {
     clearTimeout(this.timer);
     this.remaining = ms;
     this.startedAt = performance.now();
-    this.timer = setTimeout(() => {
+    const token = ++this.token;
+    this.timer = setTimeout(async () => {
       this.remaining = 0;
+      const hold = this.gate(this.id);
+      if (hold) { this.holding = true; await hold; this.holding = false; }
+      if (token !== this.token || !this.playing) return; // moved or paused meanwhile
       if (this.atEnd) { this.playing = false; this.finished = true; this.onState(); return; }
       this.next();
     }, ms);

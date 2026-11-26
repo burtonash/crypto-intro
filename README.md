@@ -49,9 +49,19 @@ To record a clip: hide the HUD, press `r` then `space`, and screen-capture the f
 
 ## Narrated tour
 
-`?tour=1` plays the Stage scenes with a voiceover. Each scene lasts as long as its line. The Explore page's **Take the tour** button opens it in vertical or wide, depending on the screen. The tour always uses the lesson's default message, because the narration is written for it. Browsers won't play sound without a click, so the tour starts from a button. `m` mutes.
+`?tour=1` plays the Stage scenes in order with narration, or use the Explore page's **▶ Take the tour** button. It opens in vertical or wide, depending on the screen. The tour always uses the lesson's default message, because the narration is written for it.
 
-The voiceover is static audio in `site/lessons/<slug>/voice/`, committed and deployed with the site. The page never calls a speech service. The narration is the `say` field on each scene in `lesson.js`. To produce the audio:
+Narration is the `say` field on each scene in `lesson.js`. Captions always show under the frame, outside the recorded area. For the voice, each scene uses the first of these that's available:
+
+1. **Recorded audio** in `site/lessons/<slug>/voice/`, used only if it was rendered from the scene's current text.
+2. **Browser text-to-speech**, if the viewer chooses "start, read aloud" or presses `v`. It's only offered when the browser has a voice installed.
+3. **Captions only.**
+
+So a lesson works with no recordings at all. Recordings can arrive one scene at a time, and an edited line falls back to browser speech until it's re-recorded. Autoplay waits for the voice to finish before moving on. `m` mutes recordings.
+
+### Producing recorded narration
+
+The audio is static, committed and deployed with the site. The page never calls a speech service.
 
 ```sh
 node tools/voiceover.mjs caesar script    # writes voice/script.md: the lines and their filenames
@@ -59,10 +69,10 @@ node tools/voiceover.mjs caesar script    # writes voice/script.md: the lines an
 
 Then either:
 
-- **Make the MP3s anywhere** (the ElevenLabs website, an MCP tool, or a recording). Save each line as `voice/<scene>.mp3`, then run `node tools/voiceover.mjs caesar manifest`.
-- **Render through the API:** set `voiceId` in `tools/voiceover.config.json`, then run `ELEVENLABS_API_KEY=… node tools/voiceover.mjs caesar render`. It only re-renders lines that changed, and it writes word-timed captions.
+- **Make the MP3s anywhere** (the ElevenLabs website, the ElevenLabs MCP, or a recording). Save each line as `voice/<scene>.mp3`, then run `node tools/voiceover.mjs caesar manifest`.
+- **Render through the API:** set `voiceId` in `tools/voiceover.config.json`, then run `ELEVENLABS_API_KEY=… node tools/voiceover.mjs caesar render`. It only re-renders lines that changed, and it writes word-timed captions. This path is untested against the live API.
 
-Both write `voice/manifest.json` and `voice/captions.vtt`, a caption file timed to the tour that you can upload alongside a video. If a line in `lesson.js` changes after its audio was made, the tour still plays and the HUD lists the scenes that need re-rendering. Without a manifest, the tour plays silently.
+Both write `voice/manifest.json` and `voice/captions.vtt`, a caption file timed to the tour that you can upload alongside a video.
 
 ## Adding a lesson
 
