@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>burtonash — brand guidelines &amp; design system v1.1</title>
+<title>burtonash — brand guidelines &amp; design system v1.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@ footer .wrap{font-family:var(--mono);font-weight:500;font-size:12px}
     <span class="tiles tiles--panel tiles--sm">
       <span class="tile t-red">b</span><span class="tile t-red">u</span><span class="tile t-red">r</span><span class="tile t-red">t</span><span class="tile t-red">o</span><span class="tile t-red">n</span><span class="tile t-amber">a</span><span class="tile t-amber">s</span><span class="tile t-amber">h</span>
     </span>
-    <span class="mastlabel">brand guidelines &amp; design system · v1.1 · july 2026</span>
+    <span class="mastlabel">brand guidelines &amp; design system · v1.2 · november 2026</span>
   </div>
 </div>
 
@@ -93,7 +93,7 @@ footer .wrap{font-family:var(--mono);font-weight:500;font-size:12px}
   <h1>maynard</h1>
   <p style="font-size:18px" class="soft">A personal brand built from the machines that started it all: DEC's press style of the seventies and eighties, phosphor-lit terminals, and one IBM XT that never really got switched off.</p>
   <p>This document is the single source of truth for the burtonash identity. It is written to be read by people and ingested by tools — hand <code>BRAND.md</code> to Claude Design, Claude Code, or anything else that builds on your behalf. The page you are reading is set entirely in the system it describes.</p>
-  <p class="mono" style="font-size:12px;color:var(--ink-soft)">01 foundations · 02 colour · 03 typography · 04 marks · 05 motifs · 06 photography &amp; editorial · 07 voice · 08 applications · 09 tokens</p>
+  <p class="mono" style="font-size:12px;color:var(--ink-soft)">01 foundations · 02 colour · 03 typography · 04 marks · 05 motifs · 06 photography &amp; editorial · 07 voice · 08 applications · 09 tokens · 10 extensions</p>
 </div>
 
 <div class="wrap section" id="foundations">
@@ -333,7 +333,7 @@ footer .wrap{font-family:var(--mono);font-weight:500;font-size:12px}
   <p class="eyebrow">09</p>
   <h2>Tokens</h2>
   <p>The entire system as CSS custom properties. This block is the machine-readable contract; everything above is commentary on it.</p>
-<pre class="term"><span class="c">/* burtonash — maynard design tokens v1.1 */</span>
+<pre class="term"><span class="c">/* burtonash — maynard design tokens v1.2 */</span>
 <span class="a">:root</span> {
   <span class="c">/* core */</span>
   --paper:      #F3EEE2;   --ink:        #1A1512;
@@ -364,6 +364,61 @@ footer .wrap{font-family:var(--mono);font-weight:500;font-size:12px}
   --panel-keyline: 1;  --panel-pad: 8;  --panel-radius: 6;
 }</pre>
   <p class="soft" style="font-size:14px">Rules that travel with the tokens: amber is never text on paper · #339900 only on dark · red cursor on paper, amber cursor on dark · dark fills take light family text · max two brights per composition · ash tiles carry the signature colour in splits · faceplate band on flagship surfaces only.</p>
+</div>
+
+<div class="wrap section" id="extensions">
+  <div class="divider"><span style="background:var(--amber)"></span><span style="background:var(--brown)"></span><span style="background:var(--red)"></span><span style="background:var(--green-deep)"></span><span style="background:var(--ink)"></span></div>
+  <p class="eyebrow">10</p>
+  <h2>Extensions for complex implementations</h2>
+  <p>Some products need more than the core system allows: cast colours, poster-scale type, diagrams with many roles. Exceptions are allowed when they follow these rules.</p>
+  <ul>
+    <li><strong>Scoped.</strong> An extension lives inside its own content surface (a demo canvas, a Stage frame, a diagram). It never leaks into site chrome, nav, footers or marks.</li>
+    <li><strong>Heritage-justified.</strong> Every added colour or device has a hardware story, like everything in the core. If you can't tell the story, don't add it.</li>
+    <li><strong>Same grammar.</strong> Paper and ink still carry the composition. Plex only. Lowercase marks, solid type, keylines on ink.</li>
+    <li><strong>Never colour alone.</strong> Every coded role also has a shape and a text label.</li>
+    <li><strong>Audited.</strong> New pairings pass WCAG AA (4.5:1 text, 3:1 shapes and UI) and are listed here before use.</li>
+    <li><strong>Registered.</strong> Each extension gets a named subsection below. If it's not written here, it isn't approved.</li>
+  </ul>
+
+  <h3>10.1 — Stage (Build → Break)</h3>
+  <p>Stage Mode is the poster-scale recording surface for the Build → Break crypto demos. It is maynard at arm's length: bigger and chunkier, but the same paper, ink and keylines.</p>
+  <p><strong>The cast.</strong> The IBM System/360 shipped with customer-chosen coloured panels, and DEC colour-coded the PDP-8 in burnt orange and goldenrod. The cast are panels on the machine. Eve is the one exception that proves the rule: the only character drawn from the CGA reserve, because she is the intruder who doesn't belong in the palette.</p>
+  <div class="demo" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+    <span style="display:inline-flex;align-items:center;gap:10px"><span style="width:44px;height:44px;border-radius:50%;background:#2B5B8A;color:#E3EDF7;display:inline-flex;align-items:center;justify-content:center" class="mono">a</span>alice</span>
+    <span style="display:inline-flex;align-items:center;gap:10px"><span style="width:44px;height:44px;background:#D06A24;color:#2A1003;display:inline-flex;align-items:center;justify-content:center" class="mono">b</span>bob</span>
+    <span style="display:inline-flex;align-items:center;gap:10px"><svg width="50" height="44" viewBox="0 0 50 44" aria-hidden="true"><polygon points="25,2 48,42 2,42" fill="#ED3FA6"/><text x="25" y="36" text-anchor="middle" font-family="IBM Plex Mono" font-weight="500" font-size="15" fill="#2A0418">e</text></svg>eve</span>
+  </div>
+  <table>
+    <tr><th>Role</th><th>Shape</th><th>Fill</th><th>Text on fill</th></tr>
+    <tr><td>Alice</td><td>circle</td><td class="mono">#2B5B8A 360 blue · 6.12 on paper</td><td class="mono">#E3EDF7 · 5.98</td></tr>
+    <tr><td>Bob</td><td>square</td><td class="mono">#D06A24 8 orange · 3.14 on paper</td><td class="mono">#2A1003 · 4.91</td></tr>
+    <tr><td>Eve</td><td>triangle</td><td class="mono">#ED3FA6 cga magenta · 3.09 on paper</td><td class="mono">#2A0418 · 5.19</td></tr>
+    <tr><td>Secret</td><td>face-down tile</td><td class="mono">ink, amber keyline</td><td class="mono">on-ink</td></tr>
+    <tr><td>Public info</td><td>open tile</td><td class="mono">amber</td><td class="mono">on-amber</td></tr>
+    <tr><td>Verified</td><td>stamp</td><td class="mono">green-deep</td><td class="mono">on-green</td></tr>
+    <tr><td>Broken</td><td>crack</td><td class="mono">red</td><td class="mono">on-red</td></tr>
+  </table>
+  <ul>
+    <li>Cast colours are identity, not decoration, so they don't count toward the two-brights budget. Everything else on a Stage frame still does.</li>
+    <li>No more than three cast members on screen at once. Cast shapes on ink take a paper keyline.</li>
+    <li>Cards are flat keylined panels: 6px ink border, 12px radius, no drop shadow.</li>
+    <li>Dark Stage frames (attacker view, terminals) follow the terminal rules: amber, #339900 or paper text, never red text.</li>
+    <li>Title and end cards use the cover recipe; the register bar is the scene-progress indicator.</li>
+    <li>Honesty notes (toy versus real attack cost) are datasheet errata, and read like them.</li>
+  </ul>
+<pre class="term"><span class="c">/* stage extension tokens — Stage and demo surfaces only */</span>
+<span class="a">:root</span> {
+  --cast-alice: #2B5B8A;  --on-alice: #E3EDF7;
+  --cast-bob:   #D06A24;  --on-bob:   #2A1003;
+  --cast-eve:   var(--cga-magenta);  --on-eve: #2A0418;
+
+  --stage-bg: var(--paper);  --stage-ink: var(--ink);
+  --stage-title: clamp(3rem, 10vw, 8rem);
+  --stage-label: clamp(1.5rem, 5vw, 3rem);
+  --stage-code:  clamp(1.25rem, 4vw, 2.5rem);
+  --stage-border: 6px solid var(--ink);  --stage-radius: 12px;
+  --stage-safe-x: 7%;  --stage-safe-y: 12%;
+}</pre>
 </div>
 
 <footer>

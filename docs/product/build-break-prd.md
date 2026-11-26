@@ -268,6 +268,8 @@ Every demo has two display modes:
 
 ### 7.6 Design system
 
+> **Superseded (Nov 2026):** the colours and stage tokens below are the original draft. The approved versions are the Stage extension in `BRAND.md` (maynard v1.2, section 10 of the brand guidelines). Sizes and safe areas carry over; colours, card radius and shadow do not.
+
 **Persistent visual roles** — the same entities appear across all 53 episodes and must be recognisable without narration:
 
 | Entity | Visual |

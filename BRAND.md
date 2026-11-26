@@ -1,4 +1,4 @@
-# burtonash — brand & design system (maynard) v1.1
+# burtonash — brand & design system (maynard) v1.2
 
 Personal brand for Ash (handle: burtonash). Not a business; nothing for sale.
 Personality: bright, casual, professional; confident and playful, never salesy.
@@ -133,3 +133,81 @@ Best-1976-datasheet register: plain, specific, quietly funny. Explain, never
 sell. Datasheet humour welcome (model numbers, errata, supported protocols).
 No hustle-culture vocabulary, no exclamation-mark enthusiasm, no emoji in
 system copy.
+
+## Extensions for complex implementations (v1.2)
+
+Some products need more than the core system allows (cast colours, poster-scale
+type, diagrams with many roles). Exceptions are allowed when they follow these rules:
+
+1. **Scoped.** An extension lives inside its own content surface (a demo
+   canvas, a Stage frame, a diagram). It never leaks into site chrome, nav,
+   footers or marks.
+2. **Heritage-justified.** Every added colour or device has a hardware story,
+   like everything in the core. If you can't tell the story, don't add it.
+3. **Same grammar.** Paper and ink still carry the composition. Plex Sans and
+   Plex Mono only. Lowercase marks, solid type, keylines on ink.
+4. **Never colour alone.** Every coded role also has a shape and a text label.
+5. **Audited.** New pairings pass WCAG AA (4.5:1 text, 3:1 shapes/UI) and are
+   listed here before use.
+6. **Registered.** Each extension gets a named subsection below. If it's not
+   written here, it isn't approved.
+
+### Extension: Stage (Build → Break)
+
+Stage Mode is the poster-scale recording surface for the Build → Break
+crypto demos (see docs/product/build-break-prd.md). It is maynard at arm's length:
+bigger and chunkier, but the same paper, ink and keylines.
+
+**The cast.** Heritage: the IBM System/360 shipped with customer-chosen
+coloured panels (red, blue, yellow, green…) and DEC colour-coded the PDP-8
+in burnt orange and goldenrod. The cast are panels on the machine. Eve is the
+one exception that proves the rule: she is the only character drawn from the
+CGA reserve, because she is the intruder who doesn't belong in the palette.
+
+| Role | Shape | Fill | Text on fill | Notes |
+|---|---|---|---|---|
+| Alice | circle | `--cast-alice` #2B5B8A (360 blue) | #E3EDF7 (5.98) | 6.12 on paper |
+| Bob | square | `--cast-bob` #D06A24 (8 orange) | #2A1003 (4.91) | 3.14 on paper (shape only) |
+| Eve | triangle | `--cga-magenta` #ED3FA6 | #2A0418 (5.19) | the only reserve colour on Stage |
+| Secret | face-down tile | `--ink` | `--on-ink`, amber keyline | hidden = dark |
+| Public info | open tile | `--amber` | `--on-amber` | in plain sight |
+| Verified | stamp | `--green-deep` | `--on-green` | |
+| Broken | crack | `--red` | `--on-red` | |
+
+```css
+:root {
+  /* cast (Stage extension only) */
+  --cast-alice: #2B5B8A; --on-alice: #E3EDF7;
+  --cast-bob:   #D06A24; --on-bob:   #2A1003;
+  --cast-eve:   var(--cga-magenta); --on-eve: #2A0418;
+
+  /* stage surface — maynard, not a separate palette */
+  --stage-bg:     var(--paper);
+  --stage-ink:    var(--ink);
+  --stage-title:  clamp(3rem, 10vw, 8rem);    /* Plex Sans 500 */
+  --stage-label:  clamp(1.5rem, 5vw, 3rem);   /* Plex Mono working weight */
+  --stage-code:   clamp(1.25rem, 4vw, 2.5rem);
+  --stage-border: 6px solid var(--ink);
+  --stage-radius: 12px;
+  --stage-safe-x: 7%;
+  --stage-safe-y: 12%;   /* vertical frame: keep the top/bottom 15% free of critical text */
+}
+```
+
+**Stage rules**
+
+- Cast colours are identity, not decoration, so they don't count toward the
+  two-brights budget. Everything else on a Stage frame still does: at most
+  two brights beyond the cast.
+- No more than three cast members on screen at once.
+- Cast shapes on ink take a 1-unit paper keyline (Alice 2.56, as for red).
+- Cards are flat, keylined panels: thick ink border, 12px radius, no drop
+  shadow. Restraint is still the style; the PRD's 36px radius and hard
+  offset shadow are not used.
+- Dark Stage frames (attacker view, terminals) follow the terminal rules:
+  ink ground, amber/#339900/paper text, never red text.
+- Title cards and end cards use the cover recipe; the register bar is the
+  scene-progress indicator.
+- Stage copy follows Voice: "Break it" not "SMASH IT 💥". The honesty notes
+  (toy vs real attack cost) are datasheet errata, and should read like them.
+- Cast colours never appear outside Stage and Explore-mode demos.
