@@ -61,19 +61,24 @@ function stageText(c) {
 function stageShift(c) { return normaliseShift(c.shift) || 3; }
 
 // ---- Stage scenes (FR-S1: big title, one visual, one sentence) ------------------
+// `say` is the tour narration, rendered to static audio by tools/voiceover.mjs.
+// It is written for the default message (HELLO, shift 3), which the tour always uses.
 
 const WINDOW = { vertical: 7, square: 7, wide: 10 };
 
 export const scenes = {
   promise: {
+    say: "This looks scrambled. K, H, O, O, R. Let's break it.",
     surface: 'cover-red',
     duration: 3500,
     title: () => 'This looks scrambled.',
     visual: (c) => h('div', { class: 'framed cz-pop' }, encrypt(stageText(c), stageShift(c))),
-    line: () => 'Let\'s break it in 20 seconds.',
+    // The silent clip reaches the break in ~13s; the narrated tour takes longer, so it doesn't promise a time.
+    line: (c) => (c.tour ? 'Let\'s break it.' : 'Let\'s break it in 20 seconds.'),
   },
 
   build: {
+    say: "The Caesar cipher moves every letter three places along the alphabet. A becomes D. Run off the end, and Z wraps round to C.",
     surface: 'paper',
     duration: 5000,
     title: (c) => `Move every letter ${stageShift(c)} places.`,
@@ -97,6 +102,7 @@ export const scenes = {
   },
 
   demo: {
+    say: "Alice writes hello, shifts it by three, and sends K, H, O, O, R. Bob knows the key, so he shifts back three and reads hello.",
     surface: 'paper',
     duration: 5000,
     title: (c) => `Alice sends ${encrypt(stageText(c), stageShift(c))}.`,
@@ -112,6 +118,7 @@ export const scenes = {
   },
 
   break: {
+    say: "Now Eve. She sees the message, but not the key. She doesn't need it. There are only twenty-five keys, so she tries every one. Shift three reads hello. Broken.",
     surface: 'ink',
     duration: 7000,
     eyebrow: (c) => cast('eve', `eve sees ${encrypt(stageText(c), stageShift(c))}`),
@@ -129,6 +136,7 @@ export const scenes = {
   },
 
   patch: {
+    say: "That's the lesson. A tiny keyspace is not security. Caesar has twenty-five keys. A modern cipher like AES has two to the power of a hundred and twenty-eight. Nobody is trying those one by one.",
     surface: 'paper',
     duration: 5000,
     title: () => 'A tiny keyspace is not security.',
@@ -139,6 +147,7 @@ export const scenes = {
   },
 
   next: {
+    say: "So what if every letter had its own mapping? That's the substitution cipher. Far more keys. Still broken. See you there.",
     surface: 'cover-ink',
     duration: 4000,
     title: () => 'What if every letter had its own mapping?',

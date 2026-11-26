@@ -110,3 +110,13 @@ body.stage-body { background: #2A2420; color: var(--on-ink); overflow: hidden; d
 .stage-hud button:hover, .stage-hud a:hover { border-color: var(--amber); }
 .stage-hud :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 .hud-keys { flex-basis: 100%; text-align: center; }
+
+/* tour start card: sits over the frame until the first click (browsers need one before playing sound) */
+.stage-viewport { position: relative; }
+.tour-start { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: rgba(26, 21, 18, .72); font-family: var(--mono); font-weight: var(--mono-w); color: var(--muted-dark); font-size: 14px; }
+.tour-start p { margin: 0; }
+.tour-go { font: 500 20px var(--sans); background: var(--red); color: var(--on-red); border: 0; border-radius: 8px; padding: 14px 28px; cursor: pointer;
+  box-shadow: 0 0 0 1px var(--paper); }
+.tour-go:hover { background: #9A1A28; }
+.tour-go:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }

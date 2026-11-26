@@ -44,7 +44,11 @@ export function runExplore(lesson, state) {
   // Keep the URL in step with the demo so any state can be shared or opened on Stage.
   store.subscribe((v) => writeState(lesson.paramsTo(v)));
 
-  const stageLink = h('a', { class: 'btn', href: '#' }, 'Open Stage Mode');
+  // The tour picks the frame that suits the screen it's watched on.
+  const tourLink = h('a', { class: 'btn', href: '?tour=1',
+    onClick: (e) => { e.preventDefault(); location.href = `?tour=1&ratio=${innerWidth > innerHeight ? 'wide' : 'vertical'}`; } },
+  '▶ Take the tour');
+  const stageLink = h('a', { class: 'btn-ghost', href: '#' }, 'Open Stage Mode');
   store.subscribe((v) => { stageLink.href = stageUrl(lesson.paramsTo(v)); });
 
   const ep = String(meta.episode).padStart(2, '0');
@@ -62,7 +66,7 @@ export function runExplore(lesson, state) {
         h('p', { class: 'eyebrow' }, `// labs · arc ${meta.arc} · episode ${ep}`),
         h('h1', {}, meta.title),
         h('p', { class: 'lede' }, meta.promise),
-        h('div', { class: 'hero-actions' }, stageLink,
+        h('div', { class: 'hero-actions' }, tourLink, stageLink,
           h('a', { class: 'btn-ghost', href: '#break' }, 'Skip to the break'))),
       h('div', { class: 'wrap beats' }, beats)),
     siteFooter(),

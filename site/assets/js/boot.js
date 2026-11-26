@@ -5,5 +5,5 @@ import { runExplore } from './explore.js';
 
 export function boot(lesson) {
   const state = readState(lesson.defaults);
-  return state.stage ? runStage(lesson, state) : runExplore(lesson, state);
+  return state.stage || state.tour ? runStage(lesson, state) : runExplore(lesson, state);
 }

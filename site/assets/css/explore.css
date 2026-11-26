@@ -98,3 +98,5 @@ footer .mut { color: var(--muted-dark); }
 .demo .meter-caption { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; }
 .demo .meter { font-size: 13px; }
 .explore-body sup { font-size: .7em; line-height: 0; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-actions .btn-ghost { margin-left: 0; }

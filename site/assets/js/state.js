@@ -14,6 +14,7 @@ export function readState(defaults = {}) {
     ...defaults,
     ...Object.fromEntries([...q].filter(([k]) => k in defaults)),
     stage: flag('stage'),
+    tour: flag('tour'),
     still: flag('still'),
     hud: q.get('hud') !== '0',
     guides: flag('guides'),

@@ -47,11 +47,28 @@ Keys: `←` `→` scene · `space` autoplay or pause · `r` reset · `c` copy th
 
 To record a clip: hide the HUD, press `r` then `space`, and screen-capture the frame. A full autoplay run is about 29 seconds.
 
+## Narrated tour
+
+`?tour=1` plays the Stage scenes with a voiceover. Each scene lasts as long as its line. The Explore page's **Take the tour** button opens it in vertical or wide, depending on the screen. The tour always uses the lesson's default message, because the narration is written for it. Browsers won't play sound without a click, so the tour starts from a button. `m` mutes.
+
+The voiceover is static audio in `site/lessons/<slug>/voice/`, committed and deployed with the site. The page never calls a speech service. The narration is the `say` field on each scene in `lesson.js`. To produce the audio:
+
+```sh
+node tools/voiceover.mjs caesar script    # writes voice/script.md: the lines and their filenames
+```
+
+Then either:
+
+- **Make the MP3s anywhere** (the ElevenLabs website, an MCP tool, or a recording). Save each line as `voice/<scene>.mp3`, then run `node tools/voiceover.mjs caesar manifest`.
+- **Render through the API:** set `voiceId` in `tools/voiceover.config.json`, then run `ELEVENLABS_API_KEY=… node tools/voiceover.mjs caesar render`. It only re-renders lines that changed, and it writes word-timed captions.
+
+Both write `voice/manifest.json` and `voice/captions.vtt`, a caption file timed to the tour that you can upload alongside a video. If a line in `lesson.js` changes after its audio was made, the tour still plays and the HUD lists the scenes that need re-rendering. Without a manifest, the tour plays silently.
+
 ## Adding a lesson
 
 Make `site/lessons/<slug>/` with a copy of the Caesar `index.html` and a `lesson.js` that exports:
 
 - `meta`: the PRD §7.7 schema plus the copy for each of the seven beats
-- `scenes`: one entry per id in `meta.stage_scenes`, each with a `surface`, `title`, `visual`, `line` and `duration`
+- `scenes`: one entry per id in `meta.stage_scenes`, each with a `surface`, `title`, `visual`, `line`, `duration` and `say` (the tour narration)
 - `widgets`: interactive parts keyed by beat id
 - `defaults`, `paramsFrom`, `paramsTo`: how the demo state maps to the URL
