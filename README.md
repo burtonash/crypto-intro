@@ -9,7 +9,8 @@ Home of **Build → Break** (working title), an interactive cryptography learnin
 | Path | What it is |
 |---|---|
 | `docs/product/build-break-prd.md` | Product requirements: the 7-arc / 53-episode ladder, Explore and Stage modes, scene system, metadata schema, release plan |
-| `docs/brand/brand-guidelines.html` | burtonash "maynard" design system v1.1: palette, type, marks, voice, tokens |
+| `BRAND.md` | Machine-readable brand spec: tokens and hard rules. Give this to any tool that builds UI |
+| `docs/brand/burtonash-brand-guidelines.html` | burtonash "maynard" design system v1.1: palette, type, marks, voice, tokens |
 | `site/index.html` | burtonash homepage (logbook) |
 | `site/about.html` | Spec-sheet about page |
 
