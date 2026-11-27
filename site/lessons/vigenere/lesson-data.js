@@ -1,0 +1,2 @@
+export const DEFAULT_MESSAGE = 'Attack the northern gate at dawn. The guards change at five, and for a few minutes nobody watches the bridge. Bring rope, bring lanterns, and do not light them until you are inside the walls. If the signal fails, wait for the bells of the chapel and try again on the following night. Tell nobody outside this company where we are going, and burn this letter as soon as you have read it.';
+export const DEFAULT_KEY = 'LEMON';

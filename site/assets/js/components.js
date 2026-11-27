@@ -76,10 +76,12 @@ export const specRows = (rows) => h('dl', { class: 'st-rows' },
   rows.map(([k, v, o = {}], i) => h('div', { class: `st-row${o.hl ? ' hl' : ''}`, style: { '--i': i } }, h('dt', { class: 'mono' }, k), h('dd', { class: 'mono' }, v))));
 
 /** Frequency bars: [{ label, value, note }]. Bars grow in one by one; note is shown at the end (e.g. "→ E"). */
-export const freqBars = (items, { label = 'letter frequencies' } = {}) => {
-  const max = Math.max(1, ...items.map((i) => i.value));
+// floor: where bars start (e.g. the score of random text), so small real differences stay visible.
+export const freqBars = (items, { label = 'letter frequencies', floor = 0 } = {}) => {
+  const max = Math.max(...items.map((i) => i.value)) || 1;
+  const span = max - floor || 1;
   return h('ol', { class: 'freq', 'aria-label': label },
-    items.map((it, i) => h('li', { style: { '--i': i, '--v': it.value / max }, class: it.hl ? 'hl' : '' },
+    items.map((it, i) => h('li', { style: { '--i': i, '--v': Math.max(0.02, (it.value - floor) / span) }, class: it.hl ? 'hl' : '' },
       h('span', { class: 'freq-k mono' }, it.label),
       h('span', { class: 'freq-bar' }, h('span', {})),
       h('span', { class: 'freq-n mono' }, it.note ?? String(it.value)))));
