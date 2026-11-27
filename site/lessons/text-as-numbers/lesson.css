@@ -1,0 +1,11 @@
+/* Text as numbers: lesson-specific Stage layouts (shared kit is in assets/css/stage.css). */
+.stage-frame .tn-flip { color: var(--on-amber); background: var(--amber); padding: 0 .1em; border-radius: 4px; }
+.tn-table { width: 100%; border-collapse: collapse; font: 500 14px var(--mono); }
+.tn-table th { text-align: left; font-size: 12px; color: var(--ink-soft); border-bottom: 1px solid var(--ink); padding: 6px 10px 6px 0; }
+.tn-table td { padding: 5px 10px 5px 0; border-bottom: 0.5px solid var(--hairline); white-space: nowrap; }
+.tn-table td.ch { font-size: 18px; }
+.tn-table tr.wide td { background: #FBF3DF; }
+#tn-text, #tn-name { font: 500 18px var(--mono); padding: 8px 10px; border: 1px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); min-width: min(320px, 80vw); }
+.enc-pick { font: 500 13px var(--mono); background: transparent; border: 1px solid var(--ink); border-radius: 4px; padding: 3px 8px; cursor: pointer; color: var(--ink); }
+.attacker .muted { color: var(--muted-dark); font-size: 14px; margin: 0 0 8px; overflow-wrap: anywhere; }
+.break-it { margin-top: 4px; }

@@ -14,7 +14,7 @@ export const arcs = [
     ep(6, 'kerckhoffs', 'Kerckhoffs\'s principle', '"What if the algorithm is secret?"', 'Only the key should need to be secret', true),
   ] },
   { n: 2, title: 'Bits, XOR and perfect secrecy', thesis: 'From letters to machine crypto: XOR is reversible, which is exactly why reusing a key is fatal.', episodes: [
-    ep(7, 'text-as-numbers', 'Text as numbers', 'Encoding confusion', 'Computers need representations'),
+    ep(7, 'text-as-numbers', 'Text as numbers', 'Encoding confusion', 'Computers need representations', true),
     ep(8, 'bits-and-bytes', 'Bits and bytes', 'Flip one bit', 'Tiny changes matter'),
     ep(9, 'xor', 'XOR machine', 'XOR twice to recover', 'Reversibility can be useful'),
     ep(10, 'stream-cipher', 'Stream-style encryption', 'Reuse the keystream', 'Reused masks leak secrets'),
