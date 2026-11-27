@@ -1,0 +1,2 @@
+// Long enough for frequency analysis to bite: it needs a few hundred letters.
+export const DEFAULT_MESSAGE = 'The plan is simple. Meet me at the old bridge at midnight and bring the money. Come alone and tell nobody where you are going. If anyone follows you, walk past the bridge and keep going until you reach the station, then wait by the clock. I will find you there. Do not call me and do not write anything down. When it is over we will never speak about this again, and nobody will ever know what happened that night.';

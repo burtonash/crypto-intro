@@ -60,3 +60,14 @@
 .on-ink .meter-seg.on { background: var(--amber); color: var(--on-amber); }
 /* colour blocks on ink carry a paper keyline (brand: keylined panels) */
 .on-ink .cast circle, .on-ink .cast rect, .on-ink .cast polygon { stroke: var(--paper); stroke-width: 1.5; }
+
+/* frequency bars (Explore and Stage) */
+.freq { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--freq-gap, 4px); width: 100%; }
+.freq li { display: grid; grid-template-columns: 2ch 1fr 5ch; align-items: center; gap: var(--freq-col-gap, 10px); font-size: var(--freq-fs, 14px); }
+.freq-bar { height: var(--freq-h, 14px); background: transparent; }
+.freq-bar span { display: block; height: 100%; width: calc(var(--v) * 100%); background: var(--brown); border-radius: 2px; }
+.freq li.hl .freq-bar span { background: var(--red); }
+.freq-n { color: var(--ink-soft); }
+.on-ink .freq-bar span { background: var(--amber); box-shadow: 0 0 0 1px var(--paper); }
+.on-ink .freq li.hl .freq-bar span { background: var(--amber); }
+.on-ink .freq-n { color: var(--muted-dark); }

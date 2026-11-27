@@ -198,3 +198,10 @@ body.stage-body { background: #2A2420; color: var(--on-ink); overflow: hidden; d
 /* label column sizes to the longest label across all rows */
 .st-rows { display: grid; grid-template-columns: max-content 1fr; column-gap: 0; }
 .st-row, .stage-frame[data-ratio="vertical"] .st-row, .stage-frame[data-ratio="wide"] .st-row { grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 3cqi; }
+.stage-frame .freq { --freq-fs: 4.4cqi; --freq-h: 3.6cqh; --freq-gap: 1.3cqh; --freq-col-gap: 2.5cqi; }
+.stage-frame[data-ratio="square"] .freq { --freq-fs: 3.4cqi; --freq-h: 3.4cqh; --freq-gap: 1cqh; }
+.stage-frame[data-ratio="wide"] .freq { --freq-fs: 2.4cqi; --freq-h: 3.4cqh; --freq-gap: .9cqh; }
+.stage-frame .freq li { animation: st-fade .3s both; animation-delay: calc(.3s + var(--i) * 120ms); }
+.stage-frame .freq-bar span { transform-origin: left; animation: st-grow .6s both; animation-delay: calc(.3s + var(--i) * 120ms); }
+.stage-frame .freq-n { animation: st-fade .3s both; animation-delay: calc(1.6s + var(--i) * 200ms); color: var(--stage-fg); }
+@keyframes st-grow { from { transform: scaleX(0); } }
