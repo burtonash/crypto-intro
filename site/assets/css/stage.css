@@ -193,3 +193,8 @@ body.stage-body { background: #2A2420; color: var(--on-ink); overflow: hidden; d
 .st-row.hl dt { color: var(--on-amber); }
 .on-ink .st-row { box-shadow: inset 0 0 0 2px #4A4038; }
 .stage-frame[data-ratio="wide"] .st-row { grid-template-columns: 22% 1fr; }
+.stage-frame[data-ratio="vertical"] .st-row dt, .stage-frame[data-ratio="vertical"] .st-row dd { font-size: 4.6cqi; }
+.stage-frame[data-ratio="vertical"] .st-row { padding: 1.4cqh 2.4cqi; grid-template-columns: 34% 1fr; }
+/* label column sizes to the longest label across all rows */
+.st-rows { display: grid; grid-template-columns: max-content 1fr; column-gap: 0; }
+.st-row, .stage-frame[data-ratio="vertical"] .st-row, .stage-frame[data-ratio="wide"] .st-row { grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 3cqi; }

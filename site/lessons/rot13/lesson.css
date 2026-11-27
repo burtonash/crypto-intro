@@ -1,0 +1,5 @@
+/* ROT13: lesson-specific Stage layouts (shared kit is in assets/css/stage.css). */
+.r13-halves { display: flex; flex-direction: column; align-items: center; gap: 2.5cqh; }
+.stage-frame .r13-halves .tiles { --tile-w: 5.9cqi; --tile-h: 10cqi; --tile-fs: 4.6cqi; --tile-gap: .7cqi; --tile-border: 3px; }
+.stage-frame[data-ratio="wide"] .r13-halves .tiles { --tile-w: 4.6cqi; --tile-h: 7.6cqi; --tile-fs: 3.6cqi; }
+.stage-frame .r13-halves .tiles[aria-label="N to Z"] .tile { animation: st-rise .45s both; animation-delay: calc(.6s + var(--i, 0) * 70ms); }
