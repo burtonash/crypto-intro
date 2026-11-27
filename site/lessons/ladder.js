@@ -11,7 +11,7 @@ export const arcs = [
     ep(3, 'rot13', 'ROT13', 'Apply it twice', 'Some ciphers barely deserve the name', true),
     ep(4, 'substitution', 'Substitution cipher', 'Frequency analysis', 'Patterns survive encryption', true),
     ep(5, 'vigenere', 'Vigenère cipher', 'Repeated-key analysis', 'Reusing structure leaks structure', true),
-    ep(6, 'kerckhoffs', 'Kerckhoffs\'s principle', '"What if the algorithm is secret?"', 'Only the key should need to be secret'),
+    ep(6, 'kerckhoffs', 'Kerckhoffs\'s principle', '"What if the algorithm is secret?"', 'Only the key should need to be secret', true),
   ] },
   { n: 2, title: 'Bits, XOR and perfect secrecy', thesis: 'From letters to machine crypto: XOR is reversible, which is exactly why reusing a key is fatal.', episodes: [
     ep(7, 'text-as-numbers', 'Text as numbers', 'Encoding confusion', 'Computers need representations'),

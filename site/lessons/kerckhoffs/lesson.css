@@ -1,0 +1,9 @@
+/* Kerckhoffs's principle: lesson-specific Stage layouts (shared kit is in assets/css/stage.css). */
+.stage-frame .kh-snip { font-size: calc(var(--stage-title) * .55); font-weight: 500; }
+.stage-frame .kh-snip.coded { background: var(--amber); color: var(--on-amber); padding: .2em .4em; border-radius: 6px; animation: st-pop .5s 1s both; }
+.stage-frame[data-ratio="wide"] .kh-snip { font-size: calc(var(--stage-title) * .4); }
+#kh-text { width: 100%; font: 500 16px var(--mono); padding: 8px 10px; border: 1px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.demo select { font: 14px var(--sans); padding: 6px 8px; border: 1px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); }
+.guess { font-size: 14px; line-height: 1.6; color: var(--on-ink); margin: 0 0 6px; overflow-wrap: anywhere; }
+.guess.solved { color: var(--amber); }
+.attacker .muted { color: var(--muted-dark); font-size: 14px; margin: 0 0 8px; }
